@@ -1,4 +1,4 @@
-# SkillSync AI 🚀
+# SkillSync  🚀
 
 **Your personalized AI-powered career coach — skill assessment, roadmap generation, job matching, mock interviews, and spaced-repetition learning in one mobile-first web app.**
 
