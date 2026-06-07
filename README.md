@@ -2,6 +2,8 @@
 
 **Your personalized AI-powered career coach — skill assessment, roadmap generation, job matching, mock interviews, and spaced-repetition learning in one mobile-first web app.**
 
+🔗 **Live Demo:** [skillsync-mentor.netlify.app](https://skillsync-mentor.netlify.app)
+
 ---
 
 ## What Is SkillSync AI?
@@ -58,7 +60,7 @@ A portfolio-style projects tracker where you log projects you've built, tag them
 ## 📁 Repository Structure
 
 ```
-skillsync-repo/
+skillsync/
 ├── frontend/
 │   ├── index.html              # Full working prototype — open in browser, no server needed
 │   └── projects_feature.html  # Projects feature UI preview (standalone)
@@ -96,6 +98,8 @@ The prototype is fully functional for demonstration. The backend exists for when
 2. Open `frontend/index.html` in any modern browser.
 3. That's it. Puter.js handles AI calls; Supabase handles resume and application data.
 
+Or just visit the live demo: [skillsync-mentor.netlify.app](https://skillsync-mentor.netlify.app)
+
 > **Note:** The file has Supabase credentials hardcoded. The anon key is low-risk by design, but rotate it in your Supabase dashboard before sharing publicly.
 
 ---
@@ -117,8 +121,6 @@ cp .env.example .env
 npm run dev        # development (nodemon, auto-restart)
 npm start          # production
 ```
-
-The server starts on `http://localhost:3000`. Put your frontend files in a `backend/public/` folder and they'll be served automatically, or keep frontend and backend separate and update the CORS config in `server.js`.
 
 ### Environment Variables
 
@@ -155,8 +157,6 @@ The server starts on `http://localhost:3000`. Put your frontend files in a `back
 
 ## 🗄️ Supabase Setup (Prototype)
 
-The prototype saves resumes and job applications to Supabase so data survives page refreshes.
-
 1. Create a free project at [supabase.com](https://supabase.com).
 2. Go to **SQL Editor** and run the full contents of `backend/supabase_setup.sql`.
 3. Go to **Project Settings → API**, copy your Project URL and anon key.
@@ -167,8 +167,6 @@ const SUPABASE_URL = 'https://your-project.supabase.co';
 const SUPABASE_KEY = 'your-anon-key-here';
 ```
 
-Everything else (auth, quiz data, roadmap, flashcards) is stored in the browser via encrypted localStorage and works without Supabase.
-
 ---
 
 ## 🛠️ Tech Stack
@@ -176,12 +174,12 @@ Everything else (auth, quiz data, roadmap, flashcards) is stored in the browser 
 **Frontend**
 - Vanilla HTML, CSS, JavaScript (zero frameworks, single file)
 - [Puter.js](https://js.puter.com/v2/) — free AI and auth layer for prototype
-- [Supabase JS](https://supabase.com/docs/reference/javascript) — Postgres persistence for resume/application data
+- [Supabase JS](https://supabase.com/docs/reference/javascript) — Postgres persistence
 - Syne + DM Sans (Google Fonts)
 
 **Backend**
 - [Express.js](https://expressjs.com/) — HTTP server and routing
-- [Mongoose](https://mongoosejs.com/) — MongoDB ODM with schema validation
+- [Mongoose](https://mongoosejs.com/) — MongoDB ODM
 - [bcryptjs](https://www.npmjs.com/package/bcryptjs) — password hashing
 - [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken) — JWT auth
 - [@google/generative-ai](https://www.npmjs.com/package/@google/generative-ai) — Gemini SDK
@@ -192,19 +190,17 @@ Everything else (auth, quiz data, roadmap, flashcards) is stored in the browser 
 ## 🔒 Security Notes
 
 - **Never commit `.env`** — it's in `.gitignore`. Use `.env.example` as the template.
-- The Supabase anon key in `index.html` is a public key (safe for client-side use) but you should still rotate it if the project goes public.
-- All backend passwords are hashed with bcrypt before storage — plaintext passwords are never saved.
-- JWT tokens expire after 7 days by default (`JWT_EXPIRES_IN` in `.env`).
-- Row Level Security is enabled on Supabase tables (policies set to allow anon for prototype simplicity — tighten these for production).
+- All backend passwords are hashed with bcrypt — plaintext passwords are never saved.
+- JWT tokens expire after 7 days by default.
+- Row Level Security is enabled on Supabase tables.
 
 ---
 
-## 🗺️ Roadmap / Planned
+## 🗺️ Planned
 
-- [ ] Full Projects feature integration (UI preview in `projects_feature.html`)
+- [ ] Full Projects feature integration
 - [ ] GitHub OAuth login
 - [ ] Real job API integration (LinkedIn, Adzuna, or Jsearch)
-- [ ] Backend port of all prototype features (currently some features are frontend-only)
 - [ ] Mobile app wrapper (Capacitor or React Native)
 
 ---
