@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SkillSync – Projects Feature Preview</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<script src="https://js.puter.com/v2/"></script>
+<style>
+  :root {
+    --purple:#7B4FD4; --purple-light:#9B6FF4; --purple-dark:#5535A8;
+    --orange:#F97316; --green:#10B981; --red:#EF4444; --blue:#3B82F6;
+    --pink:#C875C4; --navy:#1A1038; --muted:#8888AA; --bg:#0F0B1E;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:'DM Sans',sans-serif;background:#0F0B1E;display:flex;align-items:center;justify-content:center;min-height:100vh;}
+  .phone-wrap{position:relative;width:390px;height:844px;}
+  .phone-frame{width:390px;height:844px;background:#1A1038;border-radius:50px;overflow:hidden;position:relative;box-shadow:0 40px 120px rgba(123,79,212,0.5),0 0 0 12px #2A1F50,0 0 0 14px #3A2F70;}
+  .notch{position:absolute;top:0;left:50%;transform:translateX(-50%);width:130px;height:34px;background:#0F0B1E;border-radius:0 0 22px 22px;z-index:100;}
+  .screen{height:100%;overflow-y:auto;overflow-x:hidden;padding:44px 0 80px;scrollbar-width:none;}
+  .screen::-webkit-scrollbar{display:none;}
+
+  /* Skill Cards */
+  .section-label{font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:#fff;padding:0 20px;margin-bottom:10px;display:flex;align-items:center;gap:6px;}
+  .skill-cards{display:flex;gap:12px;overflow-x:auto;padding:0 20px 8px;scrollbar-width:none;}
+  .skill-cards::-webkit-scrollbar{display:none;}
+  .skill-card{min-width:140px;background:rgba(30,16,80,0.8);border:1px solid rgba(123,79,212,0.3);border-radius:16px;padding:16px;cursor:pointer;transition:transform 0.18s,border-color 0.2s,box-shadow 0.2s;backdrop-filter:blur(10px);}
+  .skill-card:hover{transform:translateY(-3px);border-color:var(--purple);box-shadow:0 8px 24px rgba(123,79,212,0.3);}
+  .skill-card:active{transform:scale(0.97);}
+  .skill-card-icon{font-size:28px;margin-bottom:10px;}
+  .skill-card-name{font-size:13px;font-weight:600;color:#fff;margin-bottom:4px;}
+  .skill-card-level{font-size:11px;color:var(--muted);}
+  .skill-card-prog{height:4px;background:rgba(255,255,255,0.1);border-radius:2px;margin-top:8px;overflow:hidden;}
+  .skill-card-prog-fill{height:100%;border-radius:2px;}
+
+  /* Bottom Sheet Overlay */
+  .overlay{position:absolute;inset:0;background:rgba(0,0,0,0.7);z-index:200;display:flex;align-items:flex-end;opacity:0;pointer-events:none;transition:opacity 0.25s;backdrop-filter:blur(4px);}
+  .overlay.active{opacity:1;pointer-events:all;}
+  .sheet{background:linear-gradient(180deg,#1e0f40,#0f0b1e);border:1px solid rgba(123,79,212,0.3);border-radius:24px 24px 0 0;width:100%;max-height:85%;overflow-y:auto;transform:translateY(100%);transition:transform 0.35s cubic-bezier(0.25,1,0.5,1);scrollbar-width:none;}
+  .sheet::-webkit-scrollbar{display:none;}
+  .overlay.active .sheet{transform:translateY(0);}
+  .sheet-handle{width:36px;height:4px;background:rgba(255,255,255,0.2);border-radius:2px;margin:16px auto 0;}
+  .sheet-header{padding:16px 20px 0;}
+  .sheet-title{font-family:'Syne',sans-serif;font-size:18px;font-weight:800;color:#fff;}
+  .sheet-sub{font-size:12px;color:var(--muted);margin-top:2px;}
+  .sheet-body{padding:16px 20px 32px;}
+
+  /* Action Buttons (Test / Projects) */
+  .action-btns{display:flex;flex-direction:column;gap:10px;margin-top:4px;}
+  .action-btn{display:flex;align-items:center;gap:14px;padding:16px;border-radius:16px;border:1px solid rgba(123,79,212,0.3);background:rgba(30,16,80,0.6);cursor:pointer;transition:all 0.2s;}
+  .action-btn:hover{border-color:var(--purple);background:rgba(123,79,212,0.15);transform:translateX(4px);}
+  .action-btn-icon{font-size:28px;width:48px;height:48px;background:rgba(123,79,212,0.2);border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .action-btn-text{}
+  .action-btn-title{font-size:15px;font-weight:700;color:#fff;}
+  .action-btn-desc{font-size:12px;color:var(--muted);margin-top:2px;}
+  .action-btn-arrow{margin-left:auto;color:var(--purple-light);font-size:18px;}
+
+  /* Project Type Buttons */
+  .type-btns{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:4px;}
+  .type-btn{padding:20px 16px;border-radius:16px;border:1px solid rgba(123,79,212,0.3);background:rgba(30,16,80,0.6);cursor:pointer;transition:all 0.2s;text-align:center;}
+  .type-btn:hover{border-color:var(--purple);background:rgba(123,79,212,0.2);transform:translateY(-2px);}
+  .type-btn-icon{font-size:32px;margin-bottom:8px;}
+  .type-btn-title{font-size:13px;font-weight:700;color:#fff;margin-bottom:4px;}
+  .type-btn-desc{font-size:11px;color:var(--muted);line-height:1.4;}
+
+  /* Back button */
+  .back-btn{display:flex;align-items:center;gap:6px;color:var(--purple-light);font-size:13px;font-weight:600;cursor:pointer;margin-bottom:16px;}
+  .back-btn:hover{opacity:0.8;}
+
+  /* Project Cards */
+  .project-card{background:rgba(20,10,50,0.8);border:1px solid rgba(123,79,212,0.2);border-radius:16px;padding:16px;margin-bottom:12px;}
+  .project-card-header{display:flex;align-items:flex-start;gap:12px;margin-bottom:10px;}
+  .project-card-emoji{font-size:28px;width:48px;height:48px;background:rgba(123,79,212,0.15);border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .project-card-meta{}
+  .project-card-title{font-size:14px;font-weight:700;color:#fff;margin-bottom:3px;}
+  .difficulty{display:inline-block;font-size:10px;font-weight:700;padding:2px 8px;border-radius:8px;}
+  .difficulty.beginner{background:rgba(16,185,129,0.2);color:#10B981;}
+  .difficulty.intermediate{background:rgba(251,191,36,0.2);color:#FBBF24;}
+  .difficulty.advanced{background:rgba(239,68,68,0.2);color:#EF4444;}
+  .project-card-desc{font-size:12px;color:var(--muted);line-height:1.5;margin-bottom:12px;}
+
+  /* Prerequisites */
+  .prereq-section{background:rgba(123,79,212,0.08);border:1px solid rgba(123,79,212,0.15);border-radius:12px;padding:12px;margin-bottom:12px;}
+  .prereq-title{font-size:11px;font-weight:700;color:var(--purple-light);margin-bottom:8px;display:flex;align-items:center;gap:4px;}
+  .prereq-item{display:flex;align-items:center;gap:8px;font-size:12px;padding:4px 0;}
+  .prereq-item.has{color:#10B981;}
+  .prereq-item.missing{color:#8888AA;}
+  .prereq-dot{font-size:14px;}
+
+  /* AI Chat bar */
+  .ai-chat-bar{display:flex;align-items:center;gap:8px;background:rgba(30,16,80,0.8);border:1px solid rgba(123,79,212,0.25);border-radius:12px;padding:8px 12px;cursor:pointer;transition:all 0.2s;margin-top:2px;}
+  .ai-chat-bar:hover{border-color:var(--purple);background:rgba(123,79,212,0.1);}
+  .ai-chat-bar-icon{font-size:16px;}
+  .ai-chat-bar-text{font-size:12px;color:var(--muted);flex:1;}
+  .ai-chat-bar-btn{font-size:11px;font-weight:700;color:var(--purple-light);background:rgba(123,79,212,0.2);padding:4px 10px;border-radius:8px;}
+
+  /* AI Chat expanded */
+  .ai-chat-expanded{background:rgba(15,11,30,0.95);border:1px solid rgba(123,79,212,0.3);border-radius:12px;padding:12px;margin-top:8px;display:none;}
+  .ai-chat-expanded.open{display:block;}
+  .ai-msgs{max-height:160px;overflow-y:auto;margin-bottom:10px;scrollbar-width:none;}
+  .ai-msgs::-webkit-scrollbar{display:none;}
+  .ai-msg{padding:8px 10px;border-radius:10px;font-size:12px;line-height:1.5;margin-bottom:6px;max-width:90%;}
+  .ai-msg.user{background:rgba(123,79,212,0.3);color:#fff;margin-left:auto;text-align:right;}
+  .ai-msg.bot{background:rgba(30,16,80,0.8);color:#C0C0E0;border:1px solid rgba(123,79,212,0.2);}
+  .ai-msg.typing{color:var(--muted);font-style:italic;}
+  .ai-input-row{display:flex;gap:8px;}
+  .ai-input{flex:1;background:rgba(30,16,80,0.6);border:1px solid rgba(123,79,212,0.25);border-radius:10px;padding:8px 12px;color:#fff;font-size:12px;font-family:'DM Sans',sans-serif;outline:none;}
+  .ai-input::placeholder{color:var(--muted);}
+  .ai-input:focus{border-color:var(--purple);}
+  .ai-send{background:var(--purple);border:none;border-radius:10px;padding:8px 12px;color:#fff;font-size:14px;cursor:pointer;transition:opacity 0.2s;}
+  .ai-send:hover{opacity:0.85;}
+
+  /* Level badge */
+  .level-badge{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;margin-left:8px;}
+  .level-badge.beginner{background:rgba(16,185,129,0.15);color:#10B981;border:1px solid rgba(16,185,129,0.3);}
+  .level-badge.intermediate{background:rgba(251,191,36,0.15);color:#FBBF24;border:1px solid rgba(251,191,36,0.3);}
+  .level-badge.advanced{background:rgba(239,68,68,0.15);color:#EF4444;border:1px solid rgba(239,68,68,0.3);}
+
+  .divider{height:1px;background:rgba(123,79,212,0.15);margin:16px 0;}
+</style>
+</head>
+<body>
+<div class="phone-wrap">
+  <div class="phone-frame">
+    <div class="notch"></div>
+
+    <!-- Main Screen -->
+    <div class="screen" id="main-screen">
+      <div style="padding:44px 20px 16px;">
+        <div style="font-family:'Syne',sans-serif;font-size:22px;font-weight:800;color:#fff;">Your Skills</div>
+        <div style="font-size:13px;color:var(--muted);margin-top:4px;">Tap a skill to explore tests & projects</div>
+      </div>
+
+      <!-- Skill Radar placeholder -->
+      <div style="margin:0 20px 20px;background:rgba(30,16,80,0.6);border:1px solid rgba(123,79,212,0.25);border-radius:16px;padding:20px;text-align:center;">
+        <div style="font-size:13px;font-weight:700;color:#fff;margin-bottom:4px;">⬡ Skill Radar</div>
+        <div style="font-size:11px;color:var(--muted);">Your skill strength visualization</div>
+        <div style="margin-top:12px;display:flex;justify-content:center;gap:16px;">
+          <div style="text-align:center"><div style="font-size:20px;font-weight:800;color:#9B6FF4;">72%</div><div style="font-size:10px;color:var(--muted);">Overall</div></div>
+          <div style="text-align:center"><div style="font-size:20px;font-weight:800;color:#10B981;">3</div><div style="font-size:10px;color:var(--muted);">Skills</div></div>
+          <div style="text-align:center"><div style="font-size:20px;font-weight:800;color:#F97316;">2</div><div style="font-size:10px;color:var(--muted);">Tests Done</div></div>
+        </div>
+      </div>
+
+      <div class="section-label">💡 Your Skills <span style="font-size:11px;color:var(--muted);font-weight:400;">— tap to explore</span></div>
+      <div class="skill-cards" id="skill-cards-container"></div>
+    </div>
+
+    <!-- Bottom Sheet Overlay -->
+    <div class="overlay" id="overlay" onclick="handleOverlayClick(event)">
+      <div class="sheet" id="sheet">
+        <div class="sheet-handle"></div>
+        <div class="sheet-header">
+          <div class="sheet-title" id="sheet-title">JavaScript</div>
+          <div class="sheet-sub" id="sheet-sub">Intermediate · 65% progress</div>
+        </div>
+        <div class="sheet-body" id="sheet-body"></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+// ─── Mock user data (mirrors your prototype's AppState) ───
+const mockUser = {
+  skills: ['JavaScript', 'React', 'Python', 'Node.js', 'SQL'],
+  domains: ['Full Stack'],
+  experience: 'Intermediate',
+  testResults: [
+    { skill: 'JavaScript', score: 68 },
+    { skill: 'React', score: 45 },
+    { skill: 'Python', score: 80 },
+    { skill: 'Node.js', score: 30 },
+    { skill: 'SQL', score: 55 },
+  ]
+};
+
+const skillIcons = { JavaScript:'⚡', Python:'🐍', React:'⚛️', 'Node.js':'🟢', SQL:'🗄️', 'Machine Learning':'🤖', 'Data Science':'📊', Java:'☕', 'C++':'⚙️', Flutter:'🦋', DevOps:'🔧', 'UI/UX':'🎨' };
+const skillColors = ['#7B4FD4','#10B981','#F97316','#3B82F6','#C875C4','#EF4444'];
+
+function getLevel(score) {
+  if (score >= 75) return { label:'Advanced', key:'advanced', pct:score };
+  if (score >= 45) return { label:'Intermediate', key:'intermediate', pct:score };
+  return { label:'Beginner', key:'beginner', pct: score || 30 };
+}
+
+// ─── Projects data from roadmap.sh ───────────────────────
+const PROJECTS = {
+  JavaScript: {
+    beginner: [
+      { emoji:'✅', title:'Task Tracker', desc:'Build a dynamic task tracker to add, complete, and delete tasks with real-time DOM updates.', difficulty:'beginner', prereqs:['HTML','CSS','JavaScript basics','DOM Manipulation'], roadmapUrl:'https://roadmap.sh/projects/task-tracker-js' },
+      { emoji:'🔢', title:'Unit Converter', desc:'Convert between units like km/miles, kg/lbs, Celsius/Fahrenheit using JavaScript logic.', difficulty:'beginner', prereqs:['HTML','CSS','JavaScript basics'], roadmapUrl:'https://roadmap.sh/projects/unit-converter' },
+    ],
+    intermediate: [
+      { emoji:'🌤️', title:'Weather Web App', desc:'Fetch and display live weather for any location using a public weather API.', difficulty:'intermediate', prereqs:['JavaScript','Fetch API','Async/Await','HTML/CSS'], roadmapUrl:'https://roadmap.sh/projects/weather-app' },
+      { emoji:'⏱️', title:'Pomodoro Timer', desc:'Build a focus timer with work/break sessions, notifications, and session history.', difficulty:'intermediate', prereqs:['JavaScript','DOM events','Local Storage'], roadmapUrl:'https://roadmap.sh/projects/pomodoro-timer' },
+      { emoji:'💬', title:'Reddit Client', desc:'Fetch and display Reddit posts from any subreddit using the Reddit JSON API.', difficulty:'intermediate', prereqs:['JavaScript','REST APIs','Async/Await','DOM'], roadmapUrl:'https://roadmap.sh/projects/reddit-client' },
+    ],
+    advanced: [
+      { emoji:'🔗', title:'URL Shortening Service', desc:'Build a full URL shortener with custom slugs, analytics, and redirect handling.', difficulty:'advanced', prereqs:['JavaScript','Node.js','Database','REST APIs'], roadmapUrl:'https://roadmap.sh/projects/url-shortening-service' },
+    ]
+  },
+  React: {
+    beginner: [
+      { emoji:'🎴', title:'Flash Cards App', desc:'Build a flashcard learning app with flip animations and score tracking using React state.', difficulty:'beginner', prereqs:['React basics','JSX','useState','CSS'], roadmapUrl:'https://roadmap.sh/projects/flash-cards' },
+      { emoji:'📋', title:'Accordion Component', desc:'Create an accessible accordion UI component with smooth expand/collapse animations.', difficulty:'beginner', prereqs:['React','JSX','useState','CSS transitions'], roadmapUrl:'https://roadmap.sh/projects/accordion' },
+    ],
+    intermediate: [
+      { emoji:'🎬', title:'Movie Reservation System', desc:'Build a seat selection and movie booking system with React state management.', difficulty:'intermediate', prereqs:['React','useState','useEffect','REST APIs','CSS Grid'], roadmapUrl:'https://roadmap.sh/projects/movie-reservation-system' },
+      { emoji:'🏋️', title:'Fitness Workout Tracker', desc:'Track workouts, sets, reps and progress with charts and local persistence.', difficulty:'intermediate', prereqs:['React','Hooks','Local Storage','Chart library'], roadmapUrl:'https://roadmap.sh/projects/fitness-workout-tracker' },
+    ],
+    advanced: [
+      { emoji:'📊', title:'Realtime Leaderboard', desc:'Build a live leaderboard with real-time updates using WebSockets and React.', difficulty:'advanced', prereqs:['React','WebSockets','Node.js','Redis','useEffect'], roadmapUrl:'https://roadmap.sh/projects/realtime-leaderboard-system' },
+    ]
+  },
+  Python: {
+    beginner: [
+      { emoji:'🌡️', title:'Temperature Converter', desc:'CLI app to convert between Celsius, Fahrenheit, and Kelvin with clean output.', difficulty:'beginner', prereqs:['Python basics','Functions','Input/Output'], roadmapUrl:'https://roadmap.sh/projects/temperature-converter' },
+      { emoji:'🔢', title:'Number Guessing Game', desc:'Interactive guessing game with hints, score tracking, and difficulty levels.', difficulty:'beginner', prereqs:['Python basics','Loops','Conditionals'], roadmapUrl:'https://roadmap.sh/projects/number-guessing-game' },
+    ],
+    intermediate: [
+      { emoji:'📝', title:'Markdown Note Taking App', desc:'Build a CLI markdown note app with create, list, search, and delete functionality.', difficulty:'intermediate', prereqs:['Python','File I/O','Markdown parsing','CLI args'], roadmapUrl:'https://roadmap.sh/projects/markdown-note-taking-app' },
+      { emoji:'🖼️', title:'Image Processing Service', desc:'Build a service to resize, compress, and convert images using Python libraries.', difficulty:'intermediate', prereqs:['Python','Pillow','REST APIs','File handling'], roadmapUrl:'https://roadmap.sh/projects/image-processing-service' },
+    ],
+    advanced: [
+      { emoji:'🔍', title:'File Integrity Checker', desc:'Monitor file changes using hash comparison and generate integrity reports.', difficulty:'advanced', prereqs:['Python','hashlib','File I/O','Scheduling','JSON'], roadmapUrl:'https://roadmap.sh/projects/file-integrity-checker' },
+    ]
+  },
+  'Node.js': {
+    beginner: [
+      { emoji:'📊', title:'GitHub User Activity', desc:'CLI tool to fetch and display any GitHub user\'s recent activity using GitHub API.', difficulty:'beginner', prereqs:['Node.js','HTTP requests','JSON','CLI args'], roadmapUrl:'https://roadmap.sh/projects/github-user-activity' },
+    ],
+    intermediate: [
+      { emoji:'📰', title:'Blogging Platform API', desc:'RESTful API for a blog with CRUD posts, user auth, and comments.', difficulty:'intermediate', prereqs:['Node.js','Express','REST APIs','JWT Auth','Database'], roadmapUrl:'https://roadmap.sh/projects/blogging-platform-api' },
+      { emoji:'💰', title:'Expense Tracker API', desc:'API to track income and expenses with filtering, summaries, and auth.', difficulty:'intermediate', prereqs:['Node.js','Express','MongoDB','JWT','REST'], roadmapUrl:'https://roadmap.sh/projects/expense-tracker-api' },
+    ],
+    advanced: [
+      { emoji:'🛒', title:'E-Commerce API', desc:'Full e-commerce backend with cart, products, JWT auth, and payment gateway integration.', difficulty:'advanced', prereqs:['Node.js','Express','MongoDB','JWT','Stripe API','REST'], roadmapUrl:'https://roadmap.sh/projects/ecommerce-api' },
+    ]
+  },
+  SQL: {
+    beginner: [
+      { emoji:'📋', title:'Personal Blog DB', desc:'Design and query a relational database schema for a blog with users, posts, and comments.', difficulty:'beginner', prereqs:['SQL basics','SELECT','JOIN','CREATE TABLE'], roadmapUrl:'https://roadmap.sh/projects/personal-blog' },
+    ],
+    intermediate: [
+      { emoji:'📈', title:'Simple Monitoring Dashboard', desc:'Build a dashboard that queries and visualizes server/app metrics from a SQL database.', difficulty:'intermediate', prereqs:['SQL','Aggregations','Indexes','Views','Basic backend'], roadmapUrl:'https://roadmap.sh/projects/simple-monitoring-dashboard' },
+    ],
+    advanced: [
+      { emoji:'🏪', title:'Scalable E-Commerce Platform', desc:'Design a high-performance e-commerce DB schema with caching and optimization.', difficulty:'advanced', prereqs:['Advanced SQL','Indexing','Partitioning','Query optimization','Redis'], roadmapUrl:'https://roadmap.sh/projects/scalable-ecommerce-platform' },
+    ]
+  }
+};
+
+// ─── Job Track Projects ───────────────────────────────────
+const JOB_TRACK_PROJECTS = {
+  'Full Stack': [
+    { emoji:'🌐', title:'Full Stack Blog Platform', desc:'Complete blog with React frontend, Node.js API, MongoDB database, and JWT auth.', difficulty:'intermediate', prereqs:['React','Node.js','Express','MongoDB','JWT Auth','REST APIs'], jobRole:'Full Stack Developer' },
+    { emoji:'🛒', title:'E-Commerce Platform', desc:'Shopping site with product listings, cart, checkout, and admin dashboard.', difficulty:'advanced', prereqs:['React','Node.js','SQL/MongoDB','Payment API','Redux/Zustand'], jobRole:'Full Stack Developer' },
+    { emoji:'💬', title:'Real-time Chat App', desc:'Group chat with WebSockets, rooms, user auth, and message history.', difficulty:'intermediate', prereqs:['React','Node.js','Socket.io','MongoDB','JWT'], jobRole:'Full Stack Engineer' },
+    { emoji:'📊', title:'Analytics Dashboard', desc:'Data visualization dashboard with charts, filters, and real-time updates.', difficulty:'intermediate', prereqs:['React','Chart.js/Recharts','REST APIs','CSS Grid'], jobRole:'Frontend Engineer' },
+  ],
+  Frontend: [
+    { emoji:'🎨', title:'Design System', desc:'Build a reusable component library with documentation and Storybook.', difficulty:'advanced', prereqs:['React','TypeScript','CSS','Storybook','Accessibility'], jobRole:'Frontend Engineer' },
+    { emoji:'🏪', title:'E-Commerce UI', desc:'Pixel-perfect shopping interface with cart, filters, and animations.', difficulty:'intermediate', prereqs:['React','CSS animations','State management','REST APIs'], jobRole:'Frontend Developer' },
+    { emoji:'📱', title:'PWA Weather App', desc:'Progressive web app with offline support, push notifications, and geolocation.', difficulty:'intermediate', prereqs:['JavaScript','Service Workers','Web APIs','CSS'], jobRole:'Frontend Engineer' },
+  ],
+  Backend: [
+    { emoji:'🔐', title:'Auth Microservice', desc:'Standalone authentication service with JWT, OAuth, refresh tokens.', difficulty:'advanced', prereqs:['Node.js/Python','JWT','OAuth2','Database','Docker'], jobRole:'Backend Engineer' },
+    { emoji:'⚡', title:'Caching Server', desc:'Build a Redis-like in-memory caching server with TTL and eviction policies.', difficulty:'advanced', prereqs:['Node.js/Python','Data Structures','Networking','CLI'], jobRole:'Backend Developer' },
+    { emoji:'📡', title:'Broadcast Server', desc:'Real-time broadcast server handling thousands of concurrent WebSocket connections.', difficulty:'advanced', prereqs:['Node.js','WebSockets','Concurrency','Load testing'], jobRole:'Backend Engineer' },
+  ],
+  'Data Science': [
+    { emoji:'📈', title:'ML Model API', desc:'Train a model and serve predictions via a REST API with monitoring.', difficulty:'advanced', prereqs:['Python','scikit-learn','FastAPI','Docker','Statistics'], jobRole:'Data Scientist' },
+    { emoji:'🔍', title:'Data Analysis Dashboard', desc:'EDA pipeline with visualizations, insights, and automated reporting.', difficulty:'intermediate', prereqs:['Python','Pandas','Matplotlib/Plotly','Jupyter'], jobRole:'Data Analyst' },
+  ],
+  'AI/ML': [
+    { emoji:'🤖', title:'AI Chatbot', desc:'Domain-specific chatbot using LLM APIs with conversation memory and RAG.', difficulty:'advanced', prereqs:['Python','LLM APIs','Vector DB','FastAPI','Prompt Engineering'], jobRole:'AI Engineer' },
+    { emoji:'👁️', title:'Image Classification App', desc:'Web app that classifies uploaded images using a trained CNN model.', difficulty:'advanced', prereqs:['Python','TensorFlow/PyTorch','FastAPI','React','CNN'], jobRole:'ML Engineer' },
+  ]
+};
+
+// ─── State ────────────────────────────────────────────────
+let activeSkill = null;
+let activeScore = 0;
+let activeLevel = null;
+
+// ─── Render Skill Cards ───────────────────────────────────
+function renderSkillCards() {
+  const container = document.getElementById('skill-cards-container');
+  container.innerHTML = mockUser.skills.map((skill, i) => {
+    const testResult = mockUser.testResults.filter(r => r.skill === skill);
+    const score = testResult.length > 0 ? Math.max(...testResult.map(r => r.score)) : 0;
+    const lvl = getLevel(score);
+    const color = skillColors[i % skillColors.length];
+    return `<div class="skill-card" onclick="openSkillSheet('${skill}', ${score})">
+      <div class="skill-card-icon">${skillIcons[skill] || '🔷'}</div>
+      <div class="skill-card-name">${skill}</div>
+      <div class="skill-card-level">${lvl.label}</div>
+      <div class="skill-card-prog"><div class="skill-card-prog-fill" style="width:${lvl.pct}%;background:${color}"></div></div>
+    </div>`;
+  }).join('');
+}
+
+// ─── Open Skill Sheet ─────────────────────────────────────
+function openSkillSheet(skill, score) {
+  activeSkill = skill;
+  activeScore = score;
+  activeLevel = getLevel(score);
+
+  document.getElementById('sheet-title').innerHTML = `${skillIcons[skill] || '🔷'} ${skill} <span class="level-badge ${activeLevel.key}">${activeLevel.label}</span>`;
+  document.getElementById('sheet-sub').textContent = `${activeLevel.pct}% progress · Tap to explore`;
+  showActionMenu();
+  document.getElementById('overlay').classList.add('active');
+}
+
+// ─── Step 1: Test or Projects ─────────────────────────────
+function showActionMenu() {
+  document.getElementById('sheet-body').innerHTML = `
+    <div class="action-btns">
+      <div class="action-btn" onclick="goToTest()">
+        <div class="action-btn-icon">🧪</div>
+        <div class="action-btn-text">
+          <div class="action-btn-title">Take Skill Test</div>
+          <div class="action-btn-desc">Test your ${activeSkill} knowledge & level up</div>
+        </div>
+        <div class="action-btn-arrow">›</div>
+      </div>
+      <div class="action-btn" onclick="showProjectTypes()">
+        <div class="action-btn-icon">🚀</div>
+        <div class="action-btn-text">
+          <div class="action-btn-title">View Projects</div>
+          <div class="action-btn-desc">Build projects matched to your level</div>
+        </div>
+        <div class="action-btn-arrow">›</div>
+      </div>
+    </div>`;
+}
+
+// ─── Step 2: By Skill or By Job Track ────────────────────
+function showProjectTypes() {
+  document.getElementById('sheet-body').innerHTML = `
+    <div class="back-btn" onclick="showActionMenu()">← Back</div>
+    <div style="font-size:13px;color:var(--muted);margin-bottom:16px;">Choose how you want project recommendations</div>
+    <div class="type-btns">
+      <div class="type-btn" onclick="showSkillProjects()">
+        <div class="type-btn-icon">💻</div>
+        <div class="type-btn-title">By Skill</div>
+        <div class="type-btn-desc">Projects for ${activeSkill} at your ${activeLevel.label} level</div>
+      </div>
+      <div class="type-btn" onclick="showJobProjects()">
+        <div class="type-btn-icon">🎯</div>
+        <div class="type-btn-title">By Job Track</div>
+        <div class="type-btn-desc">Projects for ${mockUser.domains[0] || 'Full Stack'} roles</div>
+      </div>
+    </div>`;
+}
+
+// ─── Step 3A: Skill-based Projects ───────────────────────
+function showSkillProjects() {
+  const levelKey = activeLevel.key;
+  const allProjects = PROJECTS[activeSkill] || {};
+  let projects = allProjects[levelKey] || [];
+
+  // If less than 2, supplement with adjacent level
+  if (projects.length < 2 && allProjects.intermediate) {
+    projects = [...projects, ...allProjects.intermediate].slice(0, 3);
+  }
+
+  if (projects.length === 0) {
+    projects = [{
+      emoji: '🚀', title: `${activeSkill} Portfolio Project`,
+      desc: `Build a real-world project showcasing your ${activeSkill} skills to impress employers.`,
+      difficulty: levelKey, prereqs: [activeSkill, 'Problem solving', 'Git/GitHub']
+    }];
+  }
+
+  document.getElementById('sheet-body').innerHTML = `
+    <div class="back-btn" onclick="showProjectTypes()">← Back</div>
+    <div style="font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:#fff;margin-bottom:4px;">💻 ${activeSkill} Projects</div>
+    <div style="font-size:12px;color:var(--muted);margin-bottom:16px;">${activeLevel.label} level · ${projects.length} recommendations from roadmap.sh</div>
+    ${projects.map(p => renderProjectCard(p, 'skill')).join('')}`;
+}
+
+// ─── Step 3B: Job Track Projects ─────────────────────────
+function showJobProjects() {
+  const domain = mockUser.domains[0] || 'Full Stack';
+  const projects = JOB_TRACK_PROJECTS[domain] || JOB_TRACK_PROJECTS['Full Stack'];
+
+  document.getElementById('sheet-body').innerHTML = `
+    <div class="back-btn" onclick="showProjectTypes()">← Back</div>
+    <div style="font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:#fff;margin-bottom:4px;">🎯 ${domain} Track Projects</div>
+    <div style="font-size:12px;color:var(--muted);margin-bottom:16px;">${projects.length} projects aligned to your job interests</div>
+    ${projects.map(p => renderProjectCard(p, 'job')).join('')}`;
+}
+
+// ─── Render a Project Card ────────────────────────────────
+function renderProjectCard(project, type) {
+  const userSkills = mockUser.skills.map(s => s.toLowerCase());
+  const prereqItems = project.prereqs.map(p => {
+    const has = userSkills.some(s => p.toLowerCase().includes(s) || s.includes(p.toLowerCase()));
+    return `<div class="prereq-item ${has ? 'has' : 'missing'}">
+      <span class="prereq-dot">${has ? '✅' : '○'}</span>
+      <span>${p}</span>
+    </div>`;
+  }).join('');
+
+  const cardId = `card-${Math.random().toString(36).substr(2,6)}`;
+  const chatId = `chat-${cardId}`;
+
+  return `<div class="project-card">
+    <div class="project-card-header">
+      <div class="project-card-emoji">${project.emoji}</div>
+      <div class="project-card-meta">
+        <div class="project-card-title">${project.title}</div>
+        <span class="difficulty ${project.difficulty}">${project.difficulty}</span>
+        ${project.jobRole ? `<span style="font-size:10px;color:var(--muted);margin-left:6px;">${project.jobRole}</span>` : ''}
+      </div>
+    </div>
+    <div class="project-card-desc">${project.desc}</div>
+    <div class="prereq-section">
+      <div class="prereq-title">📋 Prerequisites — what you need to know</div>
+      ${prereqItems}
+    </div>
+    <div class="ai-chat-bar" onclick="toggleAIChat('${chatId}', '${project.title}', '${activeSkill}')">
+      <span class="ai-chat-bar-icon">🤖</span>
+      <span class="ai-chat-bar-text">Ask AI about this project...</span>
+      <span class="ai-chat-bar-btn">Ask</span>
+    </div>
+    <div class="ai-chat-expanded" id="${chatId}" data-project="${project.title}" data-skill="${activeSkill}"></div>
+  </div>`;
+}
+
+// ─── AI Chat ──────────────────────────────────────────────
+function toggleAIChat(chatId, projectTitle, skill) {
+  const el = document.getElementById(chatId);
+  if (el.classList.contains('open')) { el.classList.remove('open'); return; }
+
+  el.classList.add('open');
+  el.innerHTML = `
+    <div class="ai-msgs" id="msgs-${chatId}">
+      <div class="ai-msg bot">👋 Hi! Ask me anything about the <strong>${projectTitle}</strong> project — prerequisites, folder structure, where to start, timeline, etc.</div>
+    </div>
+    <div class="ai-input-row">
+      <input class="ai-input" id="input-${chatId}" placeholder="e.g. How long will this take?" onkeydown="if(event.key==='Enter') sendAIMsg('${chatId}','${projectTitle}','${skill}')">
+      <button class="ai-send" onclick="sendAIMsg('${chatId}','${projectTitle}','${skill}')">➤</button>
+    </div>`;
+}
+
+async function sendAIMsg(chatId, projectTitle, skill) {
+  const input = document.getElementById(`input-${chatId}`);
+  const msgs = document.getElementById(`msgs-${chatId}`);
+  const question = input.value.trim();
+  if (!question) return;
+
+  input.value = '';
+  msgs.innerHTML += `<div class="ai-msg user">${question}</div>`;
+  msgs.innerHTML += `<div class="ai-msg typing" id="typing-${chatId}">typing...</div>`;
+  msgs.scrollTop = msgs.scrollHeight;
+
+  try {
+    const isSignedIn = await puter.auth.isSignedIn();
+    if (!isSignedIn) await puter.auth.signIn();
+
+    const prompt = `You are a helpful coding mentor inside SkillSync AI app. 
+The user is asking about the "${projectTitle}" project (a ${skill} project).
+User's current skills: ${mockUser.skills.join(', ')}.
+User level: ${activeLevel ? activeLevel.label : 'Intermediate'}.
+Answer their question concisely (2-4 sentences max). Be specific and encouraging.
+Question: ${question}`;
+
+    const response = await puter.ai.chat(prompt, { model: 'claude-sonnet-4-20250514' });
+    const reply = typeof response === 'string' ? response : response?.message?.content?.[0]?.text || '';
+
+    document.getElementById(`typing-${chatId}`)?.remove();
+    msgs.innerHTML += `<div class="ai-msg bot">${reply}</div>`;
+  } catch(e) {
+    document.getElementById(`typing-${chatId}`)?.remove();
+    msgs.innerHTML += `<div class="ai-msg bot">Sign in to Puter to enable AI responses! 🔐</div>`;
+  }
+  msgs.scrollTop = msgs.scrollHeight;
+}
+
+// ─── Test placeholder ─────────────────────────────────────
+function goToTest() {
+  closeSheet();
+  // In real prototype: goTo('s3')
+  alert(`Opening ${activeSkill} skill test... (connects to s3 in your prototype)`);
+}
+
+// ─── Close Sheet ──────────────────────────────────────────
+function closeSheet() {
+  document.getElementById('overlay').classList.remove('active');
+}
+
+function handleOverlayClick(e) {
+  if (e.target === document.getElementById('overlay')) closeSheet();
+}
+
+// ─── Init ─────────────────────────────────────────────────
+renderSkillCards();
+</script>
+</body>
+</html>
