@@ -8218,6 +8218,14 @@ function analyzeResume() {
   document.getElementById('resumeResult')
     .style.display = 'block';
 }
-</script>
+</script>// EXISTING code:
+window._puterReady = true;
+window._puterReadyCallbacks.forEach(fn => fn());
+
+// 👇 YAHAN ADD KARO (line 63 ke baad)
+const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+if (!localStorage.getItem('skillsync_theme')) {
+  document.documentElement.setAttribute('data-theme', prefersDark ? 'default' : 'arctic');
+}
 </body>
 </html>
