@@ -7977,6 +7977,247 @@ function sendMsg() {
   input.value = '';
   messages.scrollTop = messages.scrollHeight;
 }
+</script><section style="
+  padding:4rem 2rem;
+  background:linear-gradient(
+  135deg,#f8f9ff,#fff);">
+
+  <h2 style="text-align:center;
+    color:#333;font-size:2rem;
+    margin-bottom:0.5rem;">
+    📄 AI Resume Analyzer
+  </h2>
+  <p style="text-align:center;
+    color:#888;margin-bottom:3rem;">
+    Paste your resume — AI will analyze it!
+  </p>
+
+  <div style="max-width:700px;
+    margin:0 auto;">
+
+    <textarea id="resumeText"
+      placeholder="Paste your resume text here...
+
+Example:
+Name: Rahul Sharma
+Skills: Python, Machine Learning, React
+Experience: 6 months internship at TCS
+Education: B.Tech CSE, LNCT Bhopal"
+      rows="8"
+      style="width:100%;padding:1rem;
+      border:2px solid #667eea;
+      border-radius:15px;
+      font-size:1rem;
+      box-sizing:border-box;
+      outline:none;
+      resize:none;
+      font-family:sans-serif;"></textarea>
+
+    <button onclick="analyzeResume()"
+      style="width:100%;
+      margin-top:1rem;
+      padding:1rem;
+      background:linear-gradient(
+      135deg,#667eea,#764ba2);
+      color:white;border:none;
+      border-radius:10px;
+      font-size:1.1rem;
+      cursor:pointer;
+      font-weight:bold;">
+      🔍 Analyze Resume
+    </button>
+
+    <!-- Result -->
+    <div id="resumeResult"
+      style="display:none;
+      margin-top:2rem;">
+
+      <!-- Score -->
+      <div style="
+        background:white;
+        border-radius:15px;
+        padding:2rem;
+        box-shadow:0 4px 20px
+        rgba(0,0,0,0.08);
+        margin-bottom:1rem;
+        text-align:center;">
+        <h3 style="color:#333;
+          margin-bottom:1rem;">
+          🎯 Career Readiness Score
+        </h3>
+        <div id="scoreCircle"
+          style="width:120px;height:120px;
+          border-radius:50%;
+          background:linear-gradient(
+          135deg,#667eea,#764ba2);
+          display:flex;
+          align-items:center;
+          justify-content:center;
+          margin:0 auto 1rem;
+          flex-direction:column;">
+          <h2 id="scoreNum"
+            style="color:white;
+            margin:0;font-size:2rem;">
+            0%
+          </h2>
+          <p style="color:rgba(255,255,255,0.8);
+            margin:0;font-size:0.8rem;">
+            Score
+          </p>
+        </div>
+        <p id="scoreMsg"
+          style="color:#555;">
+        </p>
+      </div>
+
+      <!-- Skills Found -->
+      <div style="
+        background:white;
+        border-radius:15px;
+        padding:1.5rem;
+        box-shadow:0 4px 20px
+        rgba(0,0,0,0.08);
+        margin-bottom:1rem;">
+        <h3 style="color:#333;
+          margin-bottom:1rem;">
+          ✅ Skills Detected
+        </h3>
+        <div id="skillsFound"
+          style="display:flex;
+          flex-wrap:wrap;gap:0.5rem;">
+        </div>
+      </div>
+
+      <!-- Missing Skills -->
+      <div style="
+        background:white;
+        border-radius:15px;
+        padding:1.5rem;
+        box-shadow:0 4px 20px
+        rgba(0,0,0,0.08);
+        margin-bottom:1rem;">
+        <h3 style="color:#333;
+          margin-bottom:1rem;">
+          ❌ Missing Skills
+        </h3>
+        <div id="missingSkills"
+          style="display:flex;
+          flex-wrap:wrap;gap:0.5rem;">
+        </div>
+      </div>
+
+      <!-- Suggestions -->
+      <div style="
+        background:linear-gradient(
+        135deg,#667eea,#764ba2);
+        border-radius:15px;
+        padding:1.5rem;
+        color:white;">
+        <h3 style="margin-bottom:1rem;">
+          💡 AI Suggestions
+        </h3>
+        <div id="suggestions"
+          style="line-height:2;">
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<script>
+function analyzeResume() {
+  const text = document.getElementById(
+    'resumeText').value.toLowerCase();
+
+  if(!text.trim()) {
+    alert('Please paste your resume first!');
+    return;
+  }
+
+  const allSkills = [
+    'python','javascript','react',
+    'nodejs','machine learning','ai',
+    'sql','mongodb','java','c++',
+    'flutter','django','fastapi',
+    'tensorflow','docker','aws',
+    'html','css','git','data science',
+    'nlp','deep learning','kotlin',
+    'swift','typescript','firebase'
+  ];
+
+  const found = allSkills.filter(
+    s => text.includes(s));
+  const missing = allSkills.filter(
+    s => !text.includes(s)).slice(0,8);
+
+  // Score calculation
+  let score = 0;
+  if(found.length >= 8) score = 90;
+  else if(found.length >= 5) score = 75;
+  else if(found.length >= 3) score = 55;
+  else if(found.length >= 1) score = 35;
+  else score = 15;
+
+  if(text.includes('experience')) score += 5;
+  if(text.includes('project')) score += 5;
+  if(score > 100) score = 100;
+
+  // Show score
+  document.getElementById('scoreNum')
+    .textContent = score + '%';
+
+  const msgs = {
+    90: '🔥 Excellent! You are job ready!',
+    75: '💪 Good profile! Few more skills needed.',
+    55: '📚 Average. Keep learning!',
+    35: '⚠️ Needs improvement. Add more skills.',
+    0: '🚨 Very weak profile. Start learning now!'
+  };
+
+  const msgKey = score >= 90 ? 90
+    : score >= 75 ? 75
+    : score >= 55 ? 55
+    : score >= 35 ? 35 : 0;
+
+  document.getElementById('scoreMsg')
+    .textContent = msgs[msgKey];
+
+  // Show found skills
+  const foundDiv = document.getElementById(
+    'skillsFound');
+  foundDiv.innerHTML = found.length
+    ? found.map(s => `
+        <span style="background:#e8f5e9;
+          color:#2e7d32;padding:0.4rem 0.8rem;
+          border-radius:20px;font-size:0.85rem;">
+          ✅ ${s}
+        </span>`).join('')
+    : '<p style="color:#888;">No skills detected</p>';
+
+  // Show missing skills
+  const missingDiv = document.getElementById(
+    'missingSkills');
+  missingDiv.innerHTML = missing.map(s => `
+    <span style="background:#fce4ec;
+      color:#c62828;padding:0.4rem 0.8rem;
+      border-radius:20px;font-size:0.85rem;">
+      ❌ ${s}
+    </span>`).join('');
+
+  // Suggestions
+  const sugDiv = document.getElementById(
+    'suggestions');
+  sugDiv.innerHTML = `
+    ✨ Add ${missing[0]} to boost your profile<br>
+    📚 Learn ${missing[1]} — high demand skill<br>
+    💼 Add more project experience<br>
+    🎯 Complete SkillSync learning path<br>
+    🚀 Target ${found.length + 3} skills for better matches`;
+
+  document.getElementById('resumeResult')
+    .style.display = 'block';
+}
 </script>
 </body>
 </html>
