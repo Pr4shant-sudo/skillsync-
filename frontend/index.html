@@ -8462,3 +8462,54 @@ function toggleDark() {
   }
 }
 </script>
+<div id="streak-card" style="
+position:fixed;
+bottom:20px;
+right:20px;
+background:#fff;
+padding:15px;
+border-radius:12px;
+box-shadow:0 4px 15px rgba(0,0,0,0.15);
+z-index:9999;
+font-family:Arial,sans-serif;
+">
+    🔥 Learning Streak:
+    <span id="streakCount">0</span> Days
+</div>
+
+<script>
+(function(){
+
+const today = new Date().toDateString();
+
+let streak = parseInt(localStorage.getItem("learningStreak")) || 0;
+let lastVisit = localStorage.getItem("lastVisit");
+
+if(lastVisit !== today){
+
+    if(lastVisit){
+        const diff =
+        Math.floor(
+        (new Date(today)-new Date(lastVisit))
+        /(1000*60*60*24)
+        );
+
+        if(diff === 1){
+            streak++;
+        }
+        else if(diff > 1){
+            streak = 1;
+        }
+    }else{
+        streak = 1;
+    }
+
+    localStorage.setItem("learningStreak",streak);
+    localStorage.setItem("lastVisit",today);
+}
+
+document.getElementById("streakCount").textContent =
+localStorage.getItem("learningStreak") || 1;
+
+})();
+</script>
