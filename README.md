@@ -2,8 +2,7 @@
 
 **Your personalized AI-powered career coach — skill assessment, roadmap generation, job matching, mock interviews, and spaced-repetition learning in one mobile-first web app.**
 
-🔗 **Live Demo:** [skillsync-mentor.netlify.app](https://skillsync-mentor.netlify.app)
-
+🔗 **Live Demo:** [https://voluble-salmiakki-18e0a1.netlify.app/)
 ---
 
 ## What Is SkillSync AI?
