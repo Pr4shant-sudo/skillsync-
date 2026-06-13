@@ -8227,5 +8227,208 @@ const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 if (!localStorage.getItem('skillsync_theme')) {
   document.documentElement.setAttribute('data-theme', prefersDark ? 'default' : 'arctic');
 }
-</body>
+</body> <section style="
+  padding:4rem 2rem;
+  background:white;">
+
+  <h2 style="text-align:center;
+    color:#333;font-size:2rem;
+    margin-bottom:0.5rem;">
+    🎯 My Skill Tracker
+  </h2>
+  <p style="text-align:center;
+    color:#888;margin-bottom:3rem;">
+    Track your learning progress live!
+  </p>
+
+  <div style="max-width:600px;
+    margin:0 auto;
+    background:#f8f9ff;
+    border-radius:20px;
+    padding:2rem;
+    box-shadow:0 4px 20px
+    rgba(0,0,0,0.08);">
+
+    <!-- Add Skill -->
+    <div style="display:flex;
+      gap:0.5rem;margin-bottom:2rem;">
+      <input id="skillName"
+        type="text"
+        placeholder="Enter skill name..."
+        style="flex:1;padding:0.75rem;
+        border:1px solid #ddd;
+        border-radius:8px;
+        font-size:1rem;outline:none;">
+      <button onclick="addSkill()"
+        style="padding:0.75rem 1.5rem;
+        background:linear-gradient(
+        135deg,#667eea,#764ba2);
+        color:white;border:none;
+        border-radius:8px;
+        cursor:pointer;
+        font-size:1rem;">
+        + Add
+      </button>
+    </div>
+
+    <!-- Skill List -->
+    <div id="skillList"></div>
+
+    <!-- Stats -->
+    <div style="
+      display:flex;gap:1rem;
+      margin-top:2rem;
+      flex-wrap:wrap;">
+      <div style="flex:1;
+        background:white;
+        padding:1rem;
+        border-radius:10px;
+        text-align:center;
+        min-width:100px;">
+        <h3 id="totalSkills"
+          style="color:#667eea;
+          font-size:2rem;margin:0;">
+          0
+        </h3>
+        <p style="color:#888;margin:0;
+          font-size:0.85rem;">
+          Total Skills
+        </p>
+      </div>
+      <div style="flex:1;
+        background:white;
+        padding:1rem;
+        border-radius:10px;
+        text-align:center;
+        min-width:100px;">
+        <h3 id="avgProgress"
+          style="color:#764ba2;
+          font-size:2rem;margin:0;">
+          0%
+        </h3>
+        <p style="color:#888;margin:0;
+          font-size:0.85rem;">
+          Avg Progress
+        </p>
+      </div>
+      <div style="flex:1;
+        background:white;
+        padding:1rem;
+        border-radius:10px;
+        text-align:center;
+        min-width:100px;">
+        <h3 id="completedSkills"
+          style="color:#43e97b;
+          font-size:2rem;margin:0;">
+          0
+        </h3>
+        <p style="color:#888;margin:0;
+          font-size:0.85rem;">
+          Completed
+        </p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<script>
+let skills = [
+  {name:'Python', progress:75},
+  {name:'Machine Learning', progress:45},
+  {name:'React.js', progress:60}
+];
+
+function renderSkills() {
+  const list = document.getElementById('skillList');
+  list.innerHTML = '';
+
+  skills.forEach((skill, index) => {
+    const color = skill.progress >= 80
+      ? '#43e97b'
+      : skill.progress >= 50
+      ? '#667eea'
+      : '#f5576c';
+
+    list.innerHTML += `
+      <div style="
+        background:white;
+        padding:1rem;
+        border-radius:10px;
+        margin-bottom:0.75rem;">
+        <div style="display:flex;
+          justify-content:space-between;
+          align-items:center;
+          margin-bottom:0.5rem;">
+          <span style="font-weight:bold;
+            color:#333;">
+            ${skill.name}
+          </span>
+          <div style="display:flex;
+            align-items:center;
+            gap:0.5rem;">
+            <span style="color:${color};
+              font-weight:bold;">
+              ${skill.progress}%
+            </span>
+            <button onclick="deleteSkill(${index})"
+              style="background:#ff4444;
+              color:white;border:none;
+              border-radius:50%;
+              width:20px;height:20px;
+              cursor:pointer;
+              font-size:0.7rem;">
+              ✕
+            </button>
+          </div>
+        </div>
+        <input type="range"
+          min="0" max="100"
+          value="${skill.progress}"
+          oninput="updateProgress(
+            ${index}, this.value)"
+          style="width:100%;
+          accent-color:${color};">
+      </div>`;
+  });
+
+  // Update stats
+  document.getElementById('totalSkills')
+    .textContent = skills.length;
+
+  const avg = skills.length
+    ? Math.round(skills.reduce(
+        (a,b) => a + b.progress, 0
+      ) / skills.length)
+    : 0;
+  document.getElementById('avgProgress')
+    .textContent = avg + '%';
+
+  const completed = skills.filter(
+    s => s.progress === 100).length;
+  document.getElementById('completedSkills')
+    .textContent = completed;
+}
+
+function addSkill() {
+  const input = document.getElementById('skillName');
+  const name = input.value.trim();
+  if(!name) return;
+  skills.push({name: name, progress: 0});
+  input.value = '';
+  renderSkills();
+}
+
+function updateProgress(index, value) {
+  skills[index].progress = parseInt(value);
+  renderSkills();
+}
+
+function deleteSkill(index) {
+  skills.splice(index, 1);
+  renderSkills();
+}
+
+renderSkills();
+</script> 
 </html>
