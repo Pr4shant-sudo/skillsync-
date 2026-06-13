@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SkillSync – Your Personalized Career Coach</title>
+<title>SkillSync — AI Career Coaching</title>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
 <script src="https://js.puter.com/v2/"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -487,17 +487,17 @@ async function ensurePuterAuth() {
   .exp-btn { flex:1; padding:12px; text-align:center; border-radius:12px; border:1px solid rgba(123,79,212,0.3); background:rgba(30,16,80,0.6); color:var(--muted); font-size:13px; font-weight:600; cursor:pointer; transition:all 0.2s; }
   .exp-btn.selected { background:var(--purple); border-color:var(--purple); color:#fff; }
 
-  /* DESKTOP */
+  /* DESKTOP — overridden by new layout below */
   @media (min-width: 900px){
-    body { overflow:auto; padding:24px; }
-    .phone-wrap { width:min(1400px,95vw); height:min(900px,92vh); }
-    .phone-frame { width:100%; height:100%; border-radius:24px; }
+    body { overflow:auto; padding:0; }
+    .phone-wrap { width:100%; height:100%; }
+    .phone-frame { width:100%; height:100%; border-radius:0; }
     .notch { display:none; }
     #s6 { height:100%; }
   }
   @media (max-width: 899px){
-    .phone-wrap { width:390px; height:844px; }
-    .phone-frame { width:390px; height:844px; }
+    .phone-wrap { width:100%; height:100%; }
+    .phone-frame { width:100%; height:100%; border-radius:0; }
   }
 
   /* PROGRESS HERO */
@@ -795,13 +795,1595 @@ async function ensurePuterAuth() {
   .rm-ai-send{background:linear-gradient(135deg,#F97316,#FBBF24);border:none;border-radius:10px;padding:8px 14px;color:#000;font-size:14px;font-weight:700;cursor:pointer;}
 
 </style>
+
+<style>
+/* ═══════════════════════════════════════════════════════
+   YEOLPUMTA OVERRIDE — Full-app skin
+   Pure black · Orange accent · Inter · No gradients
+═══════════════════════════════════════════════════════ */
+
+/* ── Fonts ── */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+/* ── Token reset ── */
+:root {
+  --purple: #FF6B1A;
+  --purple-light: #FF8A45;
+  --purple-dark: #CC5200;
+  --orange: #FF6B1A;
+  --green: #22C55E;
+  --red: #EF4444;
+  --blue: #3B82F6;
+  --pink: #FF8A45;
+  --navy: #111111;
+  --body: #CCCCCC;
+  --muted: #666666;
+  --bg: #0A0A0A;
+  --white: #FFFFFF;
+  --card: #141414;
+  --border: #222222;
+  --accent: #FF6B1A;
+  --accent-light: #FF8A45;
+  --app-bg: #0A0A0A;
+  --frame-bg: #0F0F0F;
+  --frame-shadow: rgba(0,0,0,0.8);
+  --frame-border1: #1A1A1A;
+  --frame-border2: #222222;
+  --card-bg: #141414;
+  --card-border: #222222;
+  --text-primary: #FFFFFF;
+  --text-muted: #666666;
+  --notch-bg: #000000;
+  --yo-orange: #FF6B1A;
+  --yo-card: #141414;
+  --yo-border: #2A2A2A;
+}
+
+/* ── Gold theme → warm amber ── */
+[data-theme="gold"] {
+  --accent: #E8A020;
+  --accent-light: #F0B840;
+  --purple: #E8A020;
+  --purple-light: #F0B840;
+  --purple-dark: #B87A10;
+  --app-bg: #080800;
+  --frame-bg: #0C0C02;
+  --frame-border1: #181800;
+  --frame-border2: #222200;
+  --card-bg: #131300;
+  --card-border: #252500;
+  --text-muted: #6A6040;
+  --muted: #6A6040;
+  --notch-bg: #080800;
+  --navy: #0C0C02;
+  --yo-orange: #E8A020;
+  --yo-border: #2A2A00;
+}
+
+/* ── Forest theme → green ── */
+[data-theme="forest"] {
+  --accent: #22C55E;
+  --accent-light: #4ADE80;
+  --purple: #22C55E;
+  --purple-light: #4ADE80;
+  --purple-dark: #16A34A;
+  --app-bg: #020A04;
+  --frame-bg: #060E08;
+  --frame-border1: #0A1A0C;
+  --frame-border2: #102014;
+  --card-bg: #0A1410;
+  --card-border: #152018;
+  --text-muted: #3A6048;
+  --muted: #3A6048;
+  --notch-bg: #020A04;
+  --navy: #060E08;
+  --yo-orange: #22C55E;
+  --yo-border: #152018;
+}
+
+/* ── Arctic theme → blue / light ── */
+[data-theme="arctic"] {
+  --accent: #2563EB;
+  --accent-light: #3B82F6;
+  --purple: #2563EB;
+  --purple-light: #3B82F6;
+  --purple-dark: #1D4ED8;
+  --app-bg: #F5F5F5;
+  --frame-bg: #FFFFFF;
+  --frame-border1: #E0E0E0;
+  --frame-border2: #CCCCCC;
+  --card-bg: #F0F0F0;
+  --card-border: #E0E0E0;
+  --text-primary: #0A0A0A;
+  --text-muted: #6B7280;
+  --notch-bg: #F5F5F5;
+  --navy: #F0F0F0;
+  --muted: #6B7280;
+  --yo-orange: #2563EB;
+  --yo-border: #D0D0D0;
+}
+
+/* ── Base ── */
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
+  background: var(--app-bg) !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+/* ── Phone frame ── */
+.phone-frame {
+  background: var(--frame-bg) !important;
+  border-radius: 44px !important;
+  box-shadow:
+    0 0 0 10px var(--frame-border1),
+    0 0 0 12px var(--frame-border2),
+    0 32px 80px rgba(0,0,0,0.9) !important;
+}
+
+.notch {
+  background: #000 !important;
+}
+
+/* ── Scrollbar ── */
+.screen::-webkit-scrollbar { width: 2px; }
+.screen::-webkit-scrollbar-thumb { background: #2A2A2A; border-radius: 2px; }
+
+/* ── Screens ── */
+.screen { background: var(--app-bg) !important; }
+#s0, #s1, #s2, #s3, #s4, #s5, #s6,
+#sLogin, #sSkills, #sRoadmap { background: var(--app-bg) !important; }
+
+/* ═══════════════ SPLASH ═══════════════ */
+#s0 { background: #000 !important; }
+
+.splash-orb {
+  width: 96px !important;
+  height: 96px !important;
+  border-radius: 24px !important;
+  background: var(--accent) !important;
+  box-shadow: none !important;
+  animation: none !important;
+  margin-bottom: 28px !important;
+}
+.splash-orb::after {
+  content: 'S';
+  font-family: 'Inter', sans-serif;
+  font-size: 44px;
+  font-weight: 900;
+  color: #fff;
+}
+.splash-orb > * { display: none !important; }
+
+.splash-logo {
+  font-family: 'Inter', sans-serif !important;
+  font-size: 26px !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.5px !important;
+  color: #fff !important;
+}
+.splash-logo span { color: var(--accent) !important; }
+
+.splash-tag {
+  font-family: 'Inter', sans-serif !important;
+  font-size: 11px !important;
+  color: #444 !important;
+  letter-spacing: 2px !important;
+  text-transform: uppercase !important;
+}
+
+.splash-btn {
+  background: var(--accent) !important;
+  background-image: none !important;
+  border-radius: 10px !important;
+  font-family: 'Inter', sans-serif !important;
+  font-weight: 700 !important;
+  font-size: 15px !important;
+  letter-spacing: 0 !important;
+  box-shadow: none !important;
+  padding: 15px 48px !important;
+}
+.splash-btn:hover { transform: none !important; box-shadow: none !important; opacity: 0.88; }
+
+.floating-dots { display: none !important; }
+
+/* ═══════════════ ONBOARDING ═══════════════ */
+#s1 { background: #000 !important; }
+
+.onboard-icon {
+  font-size: 52px !important;
+  animation: none !important;
+  margin-bottom: 20px !important;
+  filter: none !important;
+}
+
+.onboard-title {
+  font-family: 'Inter', sans-serif !important;
+  font-size: 22px !important;
+  font-weight: 700 !important;
+  color: #fff !important;
+}
+.onboard-title span { color: var(--accent) !important; }
+
+.onboard-desc {
+  font-family: 'Inter', sans-serif !important;
+  font-size: 14px !important;
+  color: #555 !important;
+  line-height: 1.6 !important;
+}
+
+.dot-ind { background: #222 !important; }
+.dot-ind.active { background: var(--accent) !important; border-radius: 3px !important; }
+
+/* ═══════════════ APP HEADER ═══════════════ */
+.app-header {
+  background: var(--app-bg) !important;
+  backdrop-filter: none !important;
+  border-bottom: 1px solid #1A1A1A !important;
+  padding: 48px 16px 14px !important;
+}
+
+.app-name {
+  font-family: 'Inter', sans-serif !important;
+  font-size: 17px !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.3px !important;
+  color: #fff !important;
+}
+.app-name span { color: var(--accent) !important; }
+
+.avatar {
+  background: var(--accent) !important;
+  background-image: none !important;
+  border-radius: 10px !important;
+  font-family: 'Inter', sans-serif !important;
+  font-weight: 700 !important;
+}
+
+.notif-btn {
+  background: #161616 !important;
+  border: 1px solid #222 !important;
+  border-radius: 10px !important;
+}
+
+/* ═══════════════ BOTTOM NAV ═══════════════ */
+.bottom-nav {
+  background: #000 !important;
+  border-top: 1px solid #1A1A1A !important;
+  backdrop-filter: none !important;
+  padding: 8px 0 20px !important;
+}
+
+.nav-icon { filter: grayscale(1) opacity(0.3) !important; font-size: 19px !important; }
+.nav-label { font-family: 'Inter', sans-serif !important; font-size: 10px !important; color: #333 !important; font-weight: 500 !important; }
+.nav-item.active .nav-icon { filter: none !important; }
+.nav-item.active .nav-label { color: var(--accent) !important; font-weight: 700 !important; }
+
+/* ═══════════════ GREETING CARD ═══════════════ */
+.greeting-card {
+  background: #141414 !important;
+  background-image: none !important;
+  border-radius: 12px !important;
+  border: 1px solid #1E1E1E !important;
+  margin: 12px 16px !important;
+  position: relative;
+  overflow: hidden;
+}
+.greeting-card::before { display: none !important; }
+.greeting-card::after { display: none !important; }
+
+.greeting-hi { color: #555 !important; font-size: 12px !important; font-family: 'Inter', sans-serif !important; font-weight: 500 !important; }
+.greeting-name { font-family: 'Inter', sans-serif !important; font-size: 20px !important; font-weight: 700 !important; color: #fff !important; }
+.greeting-sub { color: #555 !important; font-family: 'Inter', sans-serif !important; font-size: 12px !important; }
+
+.prog-bar { background: #1E1E1E !important; border-radius: 2px !important; height: 3px !important; }
+.prog-fill { background: var(--accent) !important; border-radius: 2px !important; }
+.prog-label { color: #444 !important; font-family: 'Inter', sans-serif !important; font-size: 11px !important; }
+
+/* ═══════════════ SECTION TITLES ═══════════════ */
+.sec-title {
+  font-family: 'Inter', sans-serif !important;
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  color: #555 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 1px !important;
+  margin: 20px 0 10px !important;
+}
+.sec-row { margin: 20px 0 10px !important; }
+.see-all {
+  font-family: 'Inter', sans-serif !important;
+  font-size: 12px !important;
+  color: var(--accent) !important;
+  font-weight: 600 !important;
+}
+
+/* ═══════════════ SKILL CARDS ═══════════════ */
+.skill-card {
+  background: #141414 !important;
+  border: 1px solid #1E1E1E !important;
+  border-radius: 10px !important;
+  backdrop-filter: none !important;
+}
+.skill-card:hover { transform: none !important; border-color: var(--accent) !important; box-shadow: none !important; }
+.skill-card:active { transform: scale(0.97) !important; }
+.skill-card-name { font-family: 'Inter', sans-serif !important; color: #fff !important; font-weight: 600 !important; font-size: 13px !important; }
+.skill-card-level { font-family: 'Inter', sans-serif !important; color: #444 !important; font-size: 11px !important; }
+.skill-card-prog { background: #1E1E1E !important; border-radius: 1px !important; height: 3px !important; margin-top: 10px !important; }
+
+/* ═══════════════ STAT CARDS ═══════════════ */
+.stat-card {
+  background: #141414 !important;
+  border: 1px solid #1E1E1E !important;
+  border-radius: 10px !important;
+}
+.stat-card:hover { border-color: var(--accent) !important; box-shadow: none !important; transform: none !important; }
+.stat-num { font-family: 'Inter', sans-serif !important; font-size: 26px !important; font-weight: 800 !important; color: #fff !important; }
+.stat-label { font-family: 'Inter', sans-serif !important; color: #444 !important; font-size: 11px !important; }
+.stat-icon { font-size: 16px !important; margin-bottom: 6px !important; }
+
+/* ═══════════════ TASK ITEMS ═══════════════ */
+.task-item {
+  background: #141414 !important;
+  border: 1px solid #1E1E1E !important;
+  border-radius: 8px !important;
+}
+.task-item:hover { background: #1A1A1A !important; border-color: var(--accent) !important; }
+.task-icon { border-radius: 8px !important; }
+.task-name { font-family: 'Inter', sans-serif !important; color: #fff !important; font-weight: 600 !important; font-size: 13px !important; }
+.task-meta { font-family: 'Inter', sans-serif !important; color: #444 !important; font-size: 11px !important; }
+.task-badge { border-radius: 6px !important; font-family: 'Inter', sans-serif !important; }
+
+/* ═══════════════ PILL TABS ═══════════════ */
+.pill-tabs { padding: 0 16px !important; gap: 6px !important; }
+.pill {
+  font-family: 'Inter', sans-serif !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  border-radius: 6px !important;
+  padding: 7px 14px !important;
+  border: 1px solid #1E1E1E !important;
+  color: #555 !important;
+  background: #141414 !important;
+}
+.pill.active {
+  background: var(--accent) !important;
+  color: #fff !important;
+  border-color: var(--accent) !important;
+}
+
+/* ═══════════════ QUIZ ═══════════════ */
+.quiz-progress { background: #1A1A1A !important; border-radius: 1px !important; height: 3px !important; }
+.quiz-prog-fill { background: var(--accent) !important; background-image: none !important; border-radius: 1px !important; }
+.question-num { font-family: 'Inter', sans-serif !important; color: var(--accent) !important; font-weight: 700 !important; font-size: 11px !important; letter-spacing: 1.5px !important; }
+.question-text { font-family: 'Inter', sans-serif !important; font-size: 18px !important; font-weight: 700 !important; color: #fff !important; line-height: 1.4 !important; }
+
+.option-btn {
+  background: #141414 !important;
+  border: 1px solid #1E1E1E !important;
+  border-radius: 8px !important;
+  transition: border-color 0.15s, background 0.15s !important;
+}
+.option-btn:hover { border-color: var(--accent) !important; background: #1A1A1A !important; transform: none !important; }
+.option-btn:active { transform: scale(0.98) !important; }
+.option-btn.correct { border-color: var(--green) !important; background: rgba(34,197,94,0.08) !important; }
+.option-btn.wrong { border-color: var(--red) !important; background: rgba(239,68,68,0.08) !important; }
+.opt-letter {
+  background: #1E1E1E !important;
+  border-radius: 6px !important;
+  color: #888 !important;
+  font-family: 'Inter', sans-serif !important;
+  font-weight: 700 !important;
+}
+.opt-text { font-family: 'Inter', sans-serif !important; color: #CCC !important; font-size: 14px !important; }
+
+/* ═══════════════ ROADMAP / WEEK CARDS ═══════════════ */
+.roadmap-header { background: transparent !important; }
+.week-card { background: #141414 !important; border: 1px solid #1E1E1E !important; border-radius: 10px !important; margin: 0 16px 10px !important; }
+.week-card:hover { border-color: var(--accent) !important; }
+.week-num { font-family: 'Inter', sans-serif !important; color: var(--accent) !important; font-size: 10px !important; font-weight: 700 !important; letter-spacing: 1.5px !important; }
+.week-title { font-family: 'Inter', sans-serif !important; color: #fff !important; font-weight: 600 !important; font-size: 14px !important; }
+.week-body { border-top: 1px solid #1E1E1E !important; }
+.resource-item { border-bottom: 1px solid #1A1A1A !important; }
+.resource-item:hover { background: #1A1A1A !important; padding-left: 0 !important; }
+.res-name { font-family: 'Inter', sans-serif !important; color: #CCC !important; font-size: 13px !important; }
+.res-dur { font-family: 'Inter', sans-serif !important; color: #444 !important; }
+
+/* ═══════════════ JOB MATCH ═══════════════ */
+.ring-bg { stroke: #1E1E1E !important; }
+.ring-fill { stroke: var(--accent) !important; }
+.ring-num { font-family: 'Inter', sans-serif !important; font-size: 26px !important; font-weight: 800 !important; color: #fff !important; }
+.ring-label { font-family: 'Inter', sans-serif !important; color: #444 !important; }
+
+.job-card {
+  background: #141414 !important;
+  border: 1px solid #1E1E1E !important;
+  border-radius: 10px !important;
+  margin: 0 16px 10px !important;
+}
+.job-card:hover { border-color: var(--accent) !important; transform: none !important; box-shadow: none !important; }
+.job-card::before { display: none !important; }
+.job-title { font-family: 'Inter', sans-serif !important; font-size: 14px !important; font-weight: 700 !important; color: #fff !important; }
+.job-company { font-family: 'Inter', sans-serif !important; color: #555 !important; font-size: 12px !important; }
+.job-match-badge { border-radius: 6px !important; font-family: 'Inter', sans-serif !important; font-size: 11px !important; font-weight: 700 !important; }
+.job-tag {
+  background: #1A1A1A !important;
+  border: 1px solid #222 !important;
+  border-radius: 5px !important;
+  color: #888 !important;
+  font-family: 'Inter', sans-serif !important;
+}
+
+.apply-btn {
+  background: var(--accent) !important;
+  background-image: none !important;
+  border-radius: 8px !important;
+  font-family: 'Inter', sans-serif !important;
+  font-weight: 700 !important;
+  font-size: 14px !important;
+  box-shadow: none !important;
+}
+.apply-btn:hover { transform: none !important; box-shadow: none !important; opacity: 0.88; }
+
+/* ═══════════════ CHATBOT ═══════════════ */
+.chat-header {
+  background: var(--app-bg) !important;
+  border-bottom: 1px solid #1A1A1A !important;
+}
+.bot-avatar {
+  background: var(--accent) !important;
+  background-image: none !important;
+  border-radius: 10px !important;
+}
+.bot-name { font-family: 'Inter', sans-serif !important; font-weight: 700 !important; color: #fff !important; }
+.bot-status { font-family: 'Inter', sans-serif !important; font-size: 11px !important; }
+.status-green { background: var(--green) !important; }
+
+.chat-messages { background: var(--app-bg) !important; }
+.msg.bot .msg-bubble {
+  background: #141414 !important;
+  border: 1px solid #1E1E1E !important;
+  border-radius: 4px 12px 12px 12px !important;
+  color: #CCC !important;
+  font-family: 'Inter', sans-serif !important;
+  font-size: 13px !important;
+}
+.msg.user .msg-bubble {
+  background: var(--accent) !important;
+  background-image: none !important;
+  border-radius: 12px 4px 12px 12px !important;
+  color: #fff !important;
+  font-family: 'Inter', sans-serif !important;
+  font-size: 13px !important;
+}
+.msg-bubble code { background: #1A1A1A !important; }
+.msg-bubble pre { background: #111 !important; }
+.msg-time { font-family: 'Inter', sans-serif !important; color: #333 !important; }
+
+.quick-reply-btn {
+  background: #141414 !important;
+  border: 1px solid #222 !important;
+  border-radius: 6px !important;
+  color: #888 !important;
+  font-family: 'Inter', sans-serif !important;
+  font-weight: 600 !important;
+  font-size: 12px !important;
+}
+.quick-reply-btn:hover { background: #1A1A1A !important; border-color: var(--accent) !important; color: var(--accent) !important; }
+
+.chat-input-row {
+  background: var(--app-bg) !important;
+  border-top: 1px solid #1A1A1A !important;
+}
+.chat-input {
+  background: #141414 !important;
+  border: 1px solid #1E1E1E !important;
+  border-radius: 8px !important;
+  color: #fff !important;
+  font-family: 'Inter', sans-serif !important;
+}
+.chat-input:focus { border-color: var(--accent) !important; }
+.chat-input::placeholder { color: #333 !important; }
+.chat-send {
+  background: var(--accent) !important;
+  background-image: none !important;
+  border-radius: 8px !important;
+}
+.chat-send:hover { transform: none !important; opacity: 0.88; }
+
+.typing-indicator {
+  background: #141414 !important;
+  border: 1px solid #1E1E1E !important;
+  border-radius: 4px 12px 12px 12px !important;
+}
+.typing-dot { background: #444 !important; }
+
+.api-toggle-row { background: var(--app-bg) !important; border-top: 1px solid #1A1A1A !important; }
+.api-toggle-label { font-family: 'Inter', sans-serif !important; color: #444 !important; }
+
+/* ═══════════════ BUTTONS ═══════════════ */
+.btn-primary {
+  background: var(--accent) !important;
+  background-image: none !important;
+  border-radius: 8px !important;
+  font-family: 'Inter', sans-serif !important;
+  font-weight: 700 !important;
+  font-size: 15px !important;
+  box-shadow: none !important;
+  letter-spacing: 0 !important;
+}
+.btn-primary:hover { transform: none !important; box-shadow: none !important; opacity: 0.88; }
+.btn-primary:active { transform: scale(0.98) !important; }
+
+.btn-secondary {
+  border: 1px solid #2A2A2A !important;
+  border-radius: 8px !important;
+  color: #888 !important;
+  font-family: 'Inter', sans-serif !important;
+  font-weight: 600 !important;
+  font-size: 14px !important;
+}
+.btn-secondary:hover { border-color: var(--accent) !important; color: var(--accent) !important; }
+
+/* ═══════════════ MODALS ═══════════════ */
+.modal-sheet {
+  background: #0F0F0F !important;
+  border-radius: 20px 20px 0 0 !important;
+  border-top: 1px solid #1E1E1E !important;
+}
+.modal-handle { background: #2A2A2A !important; }
+.modal-title { font-family: 'Inter', sans-serif !important; font-weight: 700 !important; color: #fff !important; }
+.modal-sub { font-family: 'Inter', sans-serif !important; color: #555 !important; }
+.modal-textarea {
+  background: #141414 !important;
+  border: 1px solid #1E1E1E !important;
+  border-radius: 8px !important;
+  color: #CCC !important;
+  font-family: 'Inter', sans-serif !important;
+}
+.modal-textarea:focus { border-color: var(--accent) !important; }
+.modal-btn {
+  background: var(--accent) !important;
+  background-image: none !important;
+  border-radius: 8px !important;
+  font-family: 'Inter', sans-serif !important;
+  font-weight: 700 !important;
+}
+
+/* ═══════════════ FLASHCARDS ═══════════════ */
+.flashcard-inner { background: #0F0F0F !important; border-radius: 16px 16px 0 0 !important; border: 1px solid #1A1A1A !important; }
+.flashcard { background: #141414 !important; border: 1px solid #1E1E1E !important; border-radius: 10px !important; }
+.flashcard-q { font-family: 'Inter', sans-serif !important; color: #fff !important; font-weight: 700 !important; font-size: 13px !important; }
+.flashcard-a { font-family: 'Inter', sans-serif !important; color: #888 !important; font-size: 13px !important; }
+.flashcard-reveal { color: var(--accent) !important; font-family: 'Inter', sans-serif !important; font-weight: 600 !important; }
+
+.fc-card-front { background: #141414 !important; border: 1px solid #1E1E1E !important; border-radius: 10px !important; }
+.fc-card-back { background: #0F1A12 !important; border: 1px solid rgba(34,197,94,0.3) !important; border-radius: 10px !important; }
+.fc-q-text { font-family: 'Inter', sans-serif !important; font-weight: 700 !important; color: #fff !important; font-size: 13px !important; }
+.fc-a-text { font-family: 'Inter', sans-serif !important; color: #4ADE80 !important; font-size: 12px !important; }
+.fc-tap-hint { font-family: 'Inter', sans-serif !important; color: #333 !important; }
+
+.fc-btn {
+  border-radius: 6px !important;
+  font-family: 'Inter', sans-serif !important;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+}
+.fc-btn-again { background: rgba(239,68,68,0.1) !important; border: 1px solid rgba(239,68,68,0.3) !important; color: #EF4444 !important; }
+.fc-btn-know { background: rgba(34,197,94,0.1) !important; border: 1px solid rgba(34,197,94,0.3) !important; color: #22C55E !important; }
+
+.weakness-banner { background: rgba(239,68,68,0.06) !important; border: 1px solid rgba(239,68,68,0.2) !important; border-radius: 8px !important; }
+.weakness-banner-text { font-family: 'Inter', sans-serif !important; color: #EF4444 !important; font-size: 12px !important; }
+
+/* ═══════════════ LEITNER BOXES ═══════════════ */
+.leitner-box { background: #141414 !important; border: 1px solid #1E1E1E !important; border-radius: 8px !important; }
+.leitner-box:hover { border-color: var(--accent) !important; }
+.leitner-box.active-box { border-color: var(--accent) !important; background: rgba(255,107,26,0.08) !important; }
+.leitner-box-num { font-family: 'Inter', sans-serif !important; font-weight: 800 !important; color: #fff !important; }
+.leitner-box-label { font-family: 'Inter', sans-serif !important; color: #444 !important; }
+
+/* ═══════════════ LEADERBOARD ═══════════════ */
+.leaderboard-wrap { background: #141414 !important; border: 1px solid #1E1E1E !important; border-radius: 10px !important; }
+.lb-title { font-family: 'Inter', sans-serif !important; font-weight: 700 !important; color: #fff !important; font-size: 13px !important; }
+.lb-badge {
+  background: rgba(255,107,26,0.1) !important;
+  border: 1px solid rgba(255,107,26,0.25) !important;
+  border-radius: 6px !important;
+  color: var(--accent) !important;
+  font-family: 'Inter', sans-serif !important;
+  font-weight: 700 !important;
+}
+.lb-row { border-bottom: 1px solid #1A1A1A !important; border-radius: 0 !important; }
+.lb-row.you {
+  background: rgba(255,107,26,0.06) !important;
+  border: 1px solid rgba(255,107,26,0.2) !important;
+  border-radius: 8px !important;
+}
+.lb-rank { font-family: 'Inter', sans-serif !important; font-weight: 800 !important; color: #333 !important; font-size: 13px !important; }
+.lb-rank.gold { color: #F59E0B !important; }
+.lb-rank.silver { color: #888 !important; }
+.lb-rank.bronze { color: #A0522D !important; }
+.lb-name { font-family: 'Inter', sans-serif !important; color: #888 !important; font-size: 12px !important; }
+.lb-name.you-name { color: #fff !important; }
+.lb-streak { font-family: 'Inter', sans-serif !important; color: var(--accent) !important; font-size: 11px !important; }
+.lb-pct { font-family: 'Inter', sans-serif !important; font-weight: 700 !important; color: var(--accent) !important; }
+.lb-bar-wrap { background: #1A1A1A !important; border-radius: 1px !important; }
+.lb-bar-fill { background: var(--accent) !important; background-image: none !important; border-radius: 1px !important; }
+
+/* ═══════════════ RADAR CHART ═══════════════ */
+.radar-container { background: #141414 !important; border: 1px solid #1E1E1E !important; border-radius: 10px !important; }
+.radar-title { font-family: 'Inter', sans-serif !important; color: #fff !important; font-weight: 700 !important; font-size: 13px !important; }
+.radar-label { fill: #444 !important; font-family: 'Inter', sans-serif !important; }
+.radar-polygon { fill: rgba(255,107,26,0.1) !important; stroke: rgba(255,107,26,0.7) !important; }
+.radar-grid { stroke: #1E1E1E !important; }
+.radar-axis { stroke: #1E1E1E !important; }
+
+/* ═══════════════ PROGRESS BARS ═══════════════ */
+.hero-progress-bar { background: #1E1E1E !important; border-radius: 1px !important; height: 4px !important; }
+.hero-prog-fill { background: var(--accent) !important; border-radius: 1px !important; }
+
+.quiz-progress { background: #1A1A1A !important; border-radius: 1px !important; height: 2px !important; }
+.quiz-prog-fill { background: var(--accent) !important; background-image: none !important; border-radius: 1px !important; }
+
+/* ═══════════════ Z2H TRACKER ═══════════════ */
+.z2h-dot { background: #141414 !important; border: 1.5px solid #222 !important; }
+.z2h-dot.done { background: var(--green) !important; border-color: var(--green) !important; }
+.z2h-dot.current { background: var(--accent) !important; border-color: var(--accent) !important; box-shadow: none !important; }
+.z2h-label { font-family: 'Inter', sans-serif !important; color: #444 !important; }
+.z2h-line { background: #1E1E1E !important; }
+.z2h-line.done { background: var(--green) !important; }
+
+/* ═══════════════ PDF UPLOAD ═══════════════ */
+.pdf-drop-zone { border: 1px dashed #2A2A2A !important; border-radius: 8px !important; }
+.pdf-drop-zone:hover { border-color: var(--accent) !important; background: rgba(255,107,26,0.04) !important; }
+.pdf-drop-label { font-family: 'Inter', sans-serif !important; color: #888 !important; font-size: 13px !important; }
+.pdf-drop-sub { font-family: 'Inter', sans-serif !important; color: #444 !important; }
+.pdf-progress { background: #1A1A1A !important; }
+.pdf-prog-fill { background: var(--accent) !important; background-image: none !important; }
+
+/* ═══════════════ PARSE TAGS ═══════════════ */
+.parse-result-tag {
+  background: rgba(34,197,94,0.1) !important;
+  border: 1px solid rgba(34,197,94,0.25) !important;
+  border-radius: 5px !important;
+  color: #22C55E !important;
+  font-family: 'Inter', sans-serif !important;
+}
+.parse-miss-tag {
+  background: rgba(239,68,68,0.1) !important;
+  border: 1px solid rgba(239,68,68,0.25) !important;
+  border-radius: 5px !important;
+  color: #EF4444 !important;
+  font-family: 'Inter', sans-serif !important;
+}
+
+/* ═══════════════ AUTH / LOGIN ═══════════════ */
+#sLogin { background: #000 !important; }
+.auth-card {
+  background: #141414 !important;
+  border: 1px solid #1E1E1E !important;
+  border-radius: 12px !important;
+  backdrop-filter: none !important;
+}
+.auth-tabs { background: #0F0F0F !important; border-radius: 8px !important; }
+.auth-tab {
+  font-family: 'Inter', sans-serif !important;
+  font-weight: 600 !important;
+  color: #444 !important;
+  border-radius: 6px !important;
+  font-size: 13px !important;
+}
+.auth-tab.active {
+  background: var(--accent) !important;
+  color: #fff !important;
+  box-shadow: none !important;
+}
+.auth-label { font-family: 'Inter', sans-serif !important; color: #444 !important; font-size: 11px !important; letter-spacing: 1px !important; }
+.auth-input {
+  background: #0F0F0F !important;
+  border: 1px solid #1E1E1E !important;
+  border-radius: 8px !important;
+  color: #fff !important;
+  font-family: 'Inter', sans-serif !important;
+}
+.auth-input:focus { border-color: var(--accent) !important; }
+.auth-input::placeholder { color: #333 !important; }
+.auth-error { font-family: 'Inter', sans-serif !important; }
+.auth-hint { font-family: 'Inter', sans-serif !important; color: #444 !important; }
+.logout-btn {
+  background: rgba(239,68,68,0.08) !important;
+  border: 1px solid rgba(239,68,68,0.2) !important;
+  border-radius: 8px !important;
+  font-family: 'Inter', sans-serif !important;
+}
+
+/* ═══════════════ SKILL SETUP ═══════════════ */
+#sSkills { background: #000 !important; }
+.skills-setup-title { font-family: 'Inter', sans-serif !important; font-weight: 800 !important; color: #fff !important; font-size: 22px !important; }
+.skills-setup-sub { font-family: 'Inter', sans-serif !important; color: #444 !important; font-size: 13px !important; }
+.skills-group-label { font-family: 'Inter', sans-serif !important; color: var(--accent) !important; font-size: 11px !important; font-weight: 700 !important; letter-spacing: 1.5px !important; }
+.skill-tag-btn {
+  background: #141414 !important;
+  border: 1px solid #1E1E1E !important;
+  border-radius: 6px !important;
+  color: #888 !important;
+  font-family: 'Inter', sans-serif !important;
+  font-weight: 500 !important;
+}
+.skill-tag-btn:hover { border-color: var(--accent) !important; }
+.skill-tag-btn.selected { background: var(--accent) !important; border-color: var(--accent) !important; color: #fff !important; box-shadow: none !important; }
+.exp-btn {
+  background: #141414 !important;
+  border: 1px solid #1E1E1E !important;
+  border-radius: 8px !important;
+  color: #555 !important;
+  font-family: 'Inter', sans-serif !important;
+}
+.exp-btn.selected { background: var(--accent) !important; border-color: var(--accent) !important; color: #fff !important; }
+
+/* ═══════════════ THEME PANEL ═══════════════ */
+.theme-sheet {
+  background: #0F0F0F !important;
+  border: none !important;
+  border-top: 1px solid #1E1E1E !important;
+  border-radius: 16px 16px 0 0 !important;
+}
+.theme-handle { background: #2A2A2A !important; }
+.theme-hdr { font-family: 'Inter', sans-serif !important; font-weight: 700 !important; font-size: 15px !important; color: #fff !important; }
+.theme-section-title { font-family: 'Inter', sans-serif !important; color: #444 !important; font-size: 10px !important; letter-spacing: 1.5px !important; }
+
+.dark-toggle-row { background: #141414 !important; border: 1px solid #1E1E1E !important; border-radius: 10px !important; }
+.dark-toggle-label { font-family: 'Inter', sans-serif !important; font-weight: 600 !important; color: #fff !important; }
+.dark-toggle-desc { font-family: 'Inter', sans-serif !important; color: #444 !important; }
+.toggle-track { background: #1E1E1E !important; border-radius: 10px !important; }
+input:checked + .toggle-track { background: var(--accent) !important; }
+
+.theme-card { border-radius: 10px !important; border: 1px solid #1E1E1E !important; }
+.theme-card.active-theme { border-color: var(--accent) !important; }
+.theme-card-name { font-family: 'Inter', sans-serif !important; font-weight: 700 !important; }
+.theme-card-desc { font-family: 'Inter', sans-serif !important; }
+
+/* ═══════════════ PROJECTS ═══════════════ */
+.proj-sheet {
+  background: #0F0F0F !important;
+  background-image: none !important;
+  border: none !important;
+  border-top: 1px solid #1E1E1E !important;
+  border-radius: 20px 20px 0 0 !important;
+}
+.proj-sheet-title { font-family: 'Inter', sans-serif !important; font-weight: 700 !important; color: #fff !important; font-size: 17px !important; }
+.proj-sheet-sub { font-family: 'Inter', sans-serif !important; color: #444 !important; }
+
+.proj-action-btn {
+  background: #141414 !important;
+  border: 1px solid #1E1E1E !important;
+  border-radius: 10px !important;
+}
+.proj-action-btn:hover { border-color: var(--accent) !important; background: #1A1A1A !important; transform: none !important; }
+.proj-action-btn-icon { background: #1A1A1A !important; border-radius: 8px !important; }
+.proj-action-btn-title { font-family: 'Inter', sans-serif !important; font-weight: 700 !important; color: #fff !important; font-size: 14px !important; }
+.proj-action-btn-desc { font-family: 'Inter', sans-serif !important; color: #444 !important; }
+.proj-action-btn-arrow { color: var(--accent) !important; }
+
+.proj-type-btn {
+  background: #141414 !important;
+  border: 1px solid #1E1E1E !important;
+  border-radius: 10px !important;
+}
+.proj-type-btn:hover { border-color: var(--accent) !important; background: #1A1A1A !important; transform: none !important; }
+.proj-type-btn-title { font-family: 'Inter', sans-serif !important; font-weight: 700 !important; color: #fff !important; }
+.proj-type-btn-desc { font-family: 'Inter', sans-serif !important; color: #444 !important; }
+
+.proj-card { background: #141414 !important; border: 1px solid #1E1E1E !important; border-radius: 10px !important; }
+.proj-card-emoji { background: #1A1A1A !important; border-radius: 8px !important; }
+.proj-card-title { font-family: 'Inter', sans-serif !important; font-weight: 700 !important; color: #fff !important; }
+.proj-card-desc { font-family: 'Inter', sans-serif !important; color: #555 !important; }
+
+.proj-prereq-section { background: rgba(255,107,26,0.04) !important; border: 1px solid rgba(255,107,26,0.1) !important; border-radius: 8px !important; }
+.proj-prereq-title { color: var(--accent) !important; font-family: 'Inter', sans-serif !important; }
+
+/* ═══════════════ ROADMAP REDESIGN ═══════════════ */
+#sRoadmap { background: #000 !important; }
+.rm-screen-header { background: #000 !important; border-bottom: 1px solid #1A1A1A !important; }
+.rm-screen-name { font-family: 'Inter', sans-serif !important; font-weight: 700 !important; color: #fff !important; }
+.rm-screen-back { color: var(--accent) !important; }
+
+.rm-ai-btn {
+  background: var(--accent) !important;
+  background-image: none !important;
+  box-shadow: none !important;
+  border-radius: 8px !important;
+}
+
+.rm-prog-label { font-family: 'Inter', sans-serif !important; color: #444 !important; }
+.rm-prog-pct { font-family: 'Inter', sans-serif !important; font-weight: 700 !important; color: var(--accent) !important; }
+.rm-prog-bar { background: #1A1A1A !important; border-radius: 1px !important; }
+.rm-prog-fill { background: var(--accent) !important; background-image: none !important; border-radius: 1px !important; }
+
+.rm-loading-ring { border-color: #1A1A1A !important; border-top-color: var(--accent) !important; }
+.rm-loading-text { font-family: 'Inter', sans-serif !important; color: #444 !important; }
+
+.rm-node-dot.done { background: var(--accent) !important; border-color: var(--accent) !important; box-shadow: none !important; }
+.rm-node-dot.active-node { background: rgba(255,107,26,0.1) !important; border-color: var(--accent) !important; color: var(--accent) !important; }
+.rm-node-dot.pending { background: #141414 !important; border-color: #222 !important; color: #333 !important; }
+
+.rm-node-arrow::before { background: linear-gradient(180deg, var(--accent), rgba(255,107,26,0.15)) !important; }
+.rm-node-arrow.pending::before { background: #1A1A1A !important; }
+.rm-node-arrow-tip.done-tip { border-top-color: var(--accent) !important; }
+.rm-node-arrow-tip.pending-tip { border-top-color: #1A1A1A !important; }
+
+.rm-node-card { background: #141414 !important; border: 1px solid #1E1E1E !important; border-radius: 10px !important; }
+.rm-node-card:hover { border-color: var(--accent) !important; background: rgba(255,107,26,0.04) !important; }
+.rm-node-card.done-card { border-color: rgba(255,107,26,0.25) !important; background: rgba(255,107,26,0.03) !important; }
+.rm-node-card.week-header-card {
+  background: rgba(255,107,26,0.06) !important;
+  background-image: none !important;
+  border-color: rgba(255,107,26,0.25) !important;
+}
+.rm-week-label { font-family: 'Inter', sans-serif !important; color: var(--accent) !important; font-size: 10px !important; font-weight: 700 !important; letter-spacing: 1.5px !important; }
+.rm-node-title { font-family: 'Inter', sans-serif !important; font-weight: 600 !important; color: #fff !important; font-size: 13px !important; }
+.rm-node-title.done-title { color: var(--accent) !important; }
+.rm-node-dur { font-family: 'Inter', sans-serif !important; color: #444 !important; background: #1A1A1A !important; border-radius: 4px !important; }
+.rm-node-done-badge { font-family: 'Inter', sans-serif !important; color: var(--accent) !important; background: rgba(255,107,26,0.1) !important; border-radius: 4px !important; }
+
+/* AI chat panel on roadmap */
+.rm-ai-inner { background: #0F0F0F !important; border: none !important; border-top: 1px solid #1E1E1E !important; border-radius: 16px 16px 0 0 !important; }
+.rm-ai-title { font-family: 'Inter', sans-serif !important; font-weight: 700 !important; color: #fff !important; }
+.rm-ai-close { color: #444 !important; }
+.rm-ai-msg-bot { background: #141414 !important; border: 1px solid #1E1E1E !important; border-radius: 8px !important; color: #CCC !important; font-family: 'Inter', sans-serif !important; }
+.rm-ai-msg-user { background: #1A1A1A !important; border-radius: 8px !important; color: #fff !important; font-family: 'Inter', sans-serif !important; }
+.rm-ai-msg-typing { font-family: 'Inter', sans-serif !important; color: #444 !important; }
+.rm-ai-input { background: #141414 !important; border: 1px solid #1E1E1E !important; border-radius: 6px !important; color: #fff !important; font-family: 'Inter', sans-serif !important; }
+.rm-ai-input:focus { border-color: var(--accent) !important; }
+.rm-ai-input::placeholder { color: #333 !important; }
+.rm-ai-send { background: var(--accent) !important; background-image: none !important; border-radius: 6px !important; }
+
+/* Roadmap type sheet */
+.rm-sheet { background: #0F0F0F !important; background-image: none !important; border: none !important; border-top: 1px solid #1E1E1E !important; }
+.rm-handle { background: #2A2A2A !important; }
+.rm-sheet-title { font-family: 'Inter', sans-serif !important; font-weight: 700 !important; color: #fff !important; font-size: 18px !important; }
+.rm-sheet-sub { font-family: 'Inter', sans-serif !important; color: #444 !important; }
+.rm-type-card { background: #141414 !important; border: 1px solid #1E1E1E !important; border-radius: 10px !important; }
+.rm-type-card:hover { border-color: var(--accent) !important; background: rgba(255,107,26,0.04) !important; transform: none !important; }
+.rm-type-label { font-family: 'Inter', sans-serif !important; font-weight: 700 !important; color: #fff !important; font-size: 13px !important; }
+.rm-type-desc { font-family: 'Inter', sans-serif !important; color: #444 !important; font-size: 11px !important; }
+
+.rm-picker-title { font-family: 'Inter', sans-serif !important; font-weight: 700 !important; color: #fff !important; }
+.rm-back { color: var(--accent) !important; }
+.rm-picker-card { background: #141414 !important; border: 1px solid #1E1E1E !important; border-radius: 8px !important; }
+.rm-picker-card:hover { border-color: var(--accent) !important; background: #1A1A1A !important; transform: none !important; }
+.rm-picker-icon { background: rgba(255,107,26,0.08) !important; border-radius: 8px !important; }
+.rm-picker-name { font-family: 'Inter', sans-serif !important; font-weight: 700 !important; color: #fff !important; font-size: 13px !important; }
+.rm-picker-sub { font-family: 'Inter', sans-serif !important; color: #444 !important; }
+.rm-picker-arrow { color: var(--accent) !important; }
+
+/* ═══════════════ TOAST ═══════════════ */
+.toast {
+  background: #1A1A1A !important;
+  background-image: none !important;
+  border: 1px solid #2A2A2A !important;
+  border-radius: 8px !important;
+  color: #fff !important;
+  font-family: 'Inter', sans-serif !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+}
+
+/* ═══════════════ ANIMATIONS — keep but quiet ═══════════════ */
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.8} }
+@keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-6px)} }
+
+/* ═══════════════ MISC COMMON ═══════════════ */
+.screen-body { padding: 0 16px 24px !important; }
+
+/* Remove gradient from all generic backgrounds */
+[style*="linear-gradient(145deg"] { background: #000 !important; }
+[style*="linear-gradient(160deg"] { background: #000 !important; }
+[style*="linear-gradient(180deg"] { background: transparent !important; }
+
+/* ─── font-family reset for all text ─── */
+h1, h2, h3, h4, h5, h6, p, span, div, button, input, textarea, label, a {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* ══════════════════════════════════════════════
+   DESKTOP LAYOUT — Lovable-style sidebar + main
+   ══════════════════════════════════════════════ */
+
+/* Override phone-frame layout to be desktop */
+body {
+  background: #0A0A0A !important;
+  display: block !important;
+  overflow: auto !important;
+  min-height: 100vh;
+}
+
+/* Desktop shell */
+.desktop-shell {
+  display: flex;
+  min-height: 100vh;
+  background: #0A0A0A;
+}
+
+/* ── Sidebar ── */
+.sidebar {
+  width: 220px;
+  min-width: 220px;
+  background: #111111;
+  border-right: 1px solid #1E1E1E;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  position: fixed;
+  top: 0; left: 0; bottom: 0;
+  z-index: 100;
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+.sidebar::-webkit-scrollbar { display: none; }
+
+.sidebar-logo {
+  padding: 20px 20px 16px;
+  border-bottom: 1px solid #1E1E1E;
+  display: flex; align-items: center; gap: 10px;
+}
+.sidebar-logo-text {
+  font-family: 'Syne', sans-serif;
+  font-size: 18px; font-weight: 800; color: #fff;
+}
+.sidebar-logo-text span { color: #F97316; }
+.sidebar-logo-badge {
+  font-size: 10px; font-weight: 700; color: #666;
+  background: #1A1A1A; border: 1px solid #222;
+  border-radius: 4px; padding: 2px 6px; margin-top: 2px;
+}
+
+.sidebar-trial {
+  margin: 12px 14px;
+  background: linear-gradient(135deg, rgba(249,115,22,0.15), rgba(251,191,36,0.08));
+  border: 1px solid rgba(249,115,22,0.3);
+  border-radius: 10px; padding: 10px 12px;
+}
+.sidebar-trial-text { font-size: 11px; color: #888; margin-bottom: 6px; }
+.sidebar-trial-text strong { color: #F97316; }
+.sidebar-trial-btn {
+  width: 100%; padding: 6px; background: #F97316; border: none;
+  border-radius: 6px; color: #000; font-size: 11px; font-weight: 700;
+  cursor: pointer; transition: opacity 0.2s;
+}
+.sidebar-trial-btn:hover { opacity: 0.85; }
+
+.sidebar-section-label {
+  font-size: 10px; font-weight: 700; color: #444;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  padding: 14px 20px 6px;
+}
+
+.sidebar-nav { display: flex; flex-direction: column; gap: 2px; padding: 0 10px; }
+
+.sidebar-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 9px 12px; border-radius: 8px;
+  cursor: pointer; transition: all 0.15s;
+  color: #666; font-size: 13px; font-weight: 500;
+  text-decoration: none; border: none; background: none;
+  width: 100%; text-align: left;
+}
+.sidebar-item:hover { background: #1A1A1A; color: #ccc; }
+.sidebar-item.active { background: rgba(249,115,22,0.12); color: #F97316; font-weight: 600; }
+.sidebar-item-icon { font-size: 15px; width: 20px; text-align: center; flex-shrink: 0; }
+.sidebar-item-badge {
+  margin-left: auto; font-size: 10px; font-weight: 700;
+  background: rgba(249,115,22,0.2); color: #F97316;
+  border-radius: 10px; padding: 2px 7px;
+}
+
+.sidebar-divider { height: 1px; background: #1A1A1A; margin: 8px 14px; }
+
+.sidebar-user {
+  margin-top: auto; padding: 14px 16px;
+  border-top: 1px solid #1E1E1E;
+  display: flex; align-items: center; gap: 10px;
+}
+.sidebar-user-avatar {
+  width: 32px; height: 32px; border-radius: 8px;
+  background: linear-gradient(135deg, #F97316, #FBBF24);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 800; color: #000; flex-shrink: 0;
+  cursor: pointer;
+}
+.sidebar-user-name { font-size: 13px; font-weight: 600; color: #ccc; }
+.sidebar-user-role { font-size: 11px; color: #555; }
+.sidebar-user-logout {
+  margin-left: auto; font-size: 11px; color: #555;
+  cursor: pointer; padding: 4px 8px; border-radius: 6px;
+  border: 1px solid #1E1E1E; background: none;
+  transition: all 0.15s;
+}
+.sidebar-user-logout:hover { color: #EF4444; border-color: rgba(239,68,68,0.4); background: rgba(239,68,68,0.08); }
+
+/* ── Top bar ── */
+.topbar {
+  height: 52px;
+  background: #111111;
+  border-bottom: 1px solid #1E1E1E;
+  display: flex; align-items: center;
+  padding: 0 20px; gap: 14px;
+  position: sticky; top: 0; z-index: 50;
+}
+.topbar-search {
+  flex: 1; max-width: 340px;
+  display: flex; align-items: center; gap: 8px;
+  background: #0A0A0A; border: 1px solid #1E1E1E;
+  border-radius: 8px; padding: 7px 12px;
+  color: #555; font-size: 13px; cursor: text;
+}
+.topbar-search input {
+  background: none; border: none; outline: none;
+  color: #ccc; font-size: 13px; flex: 1;
+}
+.topbar-search input::placeholder { color: #444; }
+.topbar-actions { display: flex; align-items: center; gap: 10px; margin-left: auto; }
+.topbar-btn {
+  padding: 6px 14px; border-radius: 7px; border: 1px solid #1E1E1E;
+  background: #1A1A1A; color: #888; font-size: 12px; font-weight: 600;
+  cursor: pointer; transition: all 0.15s;
+}
+.topbar-btn:hover { border-color: #F97316; color: #F97316; }
+.topbar-btn.primary {
+  background: #F97316; border-color: #F97316;
+  color: #000; font-weight: 700;
+}
+.topbar-btn.primary:hover { opacity: 0.9; }
+.topbar-streak {
+  display: flex; align-items: center; gap: 5px;
+  font-size: 12px; font-weight: 700; color: #F97316;
+}
+
+/* ── Main content area ── */
+.main-area {
+  margin-left: 220px;
+  display: flex; flex-direction: column;
+  min-height: 100vh;
+  flex: 1;
+}
+.main-content {
+  flex: 1;
+  padding: 0;
+  overflow: hidden;
+}
+
+/* ── Page container (holds the phone screens as content panels) ── */
+.page-view {
+  width: 100%;
+  height: calc(100vh - 52px);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Override phone-wrap styles to fill the page */
+.phone-wrap {
+  width: 100% !important;
+  height: 100% !important;
+  position: relative;
+}
+.phone-frame {
+  width: 100% !important;
+  height: 100% !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  background: #0A0A0A !important;
+}
+.notch { display: none !important; }
+
+/* Override screen backgrounds for desktop */
+.screen { background: #0A0A0A !important; }
+#s0 { background: #0A0A0A !important; }
+#s1 { background: #0A0A0A !important; }
+#sLogin { background: #0A0A0A !important; }
+#sSkills { background: #0A0A0A !important; }
+
+/* Hide bottom nav — replaced by sidebar */
+.bottom-nav { display: none !important; }
+
+/* Adjust app-header for desktop (no status bar padding) */
+.app-header { padding: 16px 20px !important; }
+.chat-header { padding: 16px 20px 12px !important; }
+.quiz-header { padding: 16px 20px 12px !important; }
+.roadmap-header { padding: 16px 20px 12px !important; }
+.new-screen-header { padding: 16px 20px 12px !important; }
+
+/* Desktop scrollable screen body */
+.screen { overflow-y: auto !important; }
+#s2 > div[style*="overflow-y:auto"] {
+  height: calc(100vh - 52px - 68px) !important;
+}
+
+/* Splash screen for desktop */
+#s0 {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0 !important;
+}
+
+/* Auth screen desktop */
+.auth-wrap { max-width: 420px; margin: 0 auto; padding: 40px 20px; }
+
+/* Skills setup desktop */
+.skills-wrap { max-width: 480px; margin: 0 auto; padding: 30px 20px; }
+
+/* Sidebar mobile toggle (hidden on desktop) */
+.sidebar-mobile-toggle { display: none; }
+
+/* Active sidebar item highlight driven by JS */
+.sidebar-item[data-screen].active { background: rgba(249,115,22,0.12); color: #F97316; }
+
+/* Dashboard grid for desktop */
+@media (min-width: 900px) {
+  #s2 .screen-body { max-width: 900px; }
+  .greeting-card { margin: 16px 20px; }
+}
+
+/* Toast sits at top-right on desktop */
+.toast {
+  top: 60px !important;
+  bottom: auto !important;
+  right: 20px !important;
+  left: auto !important;
+  transform: translateX(110%) !important;
+  border-radius: 10px !important;
+}
+.toast.show {
+  transform: translateX(0) !important;
+}
+
+/* ══════════════════════════════════════════════
+   COMMUNITY BAR
+══════════════════════════════════════════════ */
+.community-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--card-bg, rgba(30,16,80,0.6));
+  border: 1px solid var(--card-border, rgba(123,79,212,0.25));
+  border-radius: 16px;
+  padding: 12px 14px;
+  margin-bottom: 20px;
+  cursor: pointer;
+  transition: all 0.22s cubic-bezier(0.25,1,0.5,1);
+  user-select: none;
+}
+.community-bar:hover {
+  border-color: var(--accent, #7B4FD4);
+  background: rgba(123,79,212,0.18);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(123,79,212,0.15);
+}
+.community-bar:active { transform: scale(0.98); }
+.cb-left { display: flex; align-items: center; gap: 10px; }
+.cb-icon-wrap {
+  width: 34px; height: 34px; border-radius: 10px;
+  background: linear-gradient(135deg, var(--accent,#7B4FD4), var(--pink,#C875C4));
+  display: flex; align-items: center; justify-content: center;
+  color: #fff; flex-shrink: 0;
+}
+.cb-title {
+  font-family: 'Syne', sans-serif; font-size: 14px;
+  font-weight: 700; color: var(--text-primary, #fff);
+}
+.cb-sub { font-size: 11px; color: var(--text-muted, #8888AA); margin-top: 1px; }
+.cb-right { display: flex; align-items: center; gap: 6px; }
+.cb-tab {
+  display: flex; align-items: center; gap: 5px;
+  padding: 5px 10px; border-radius: 20px;
+  font-size: 11px; font-weight: 600;
+  color: var(--text-muted, #8888AA);
+  border: 1px solid transparent;
+  transition: all 0.18s; cursor: pointer;
+}
+.cb-tab:hover { color: var(--accent-light, #9B6FF4); border-color: rgba(123,79,212,0.3); }
+.cb-tab.active {
+  background: rgba(123,79,212,0.2);
+  border-color: rgba(123,79,212,0.4);
+  color: var(--accent-light, #9B6FF4);
+}
+.cb-chevron { font-size: 18px; color: var(--text-muted, #8888AA); margin-left: 2px; }
+
+/* ══════════════════════════════════════════════
+   COMMUNITY OVERLAY + MODAL
+══════════════════════════════════════════════ */
+.community-overlay {
+  position: absolute; inset: 0;
+  background: rgba(0,0,0,0.65);
+  z-index: 300;
+  backdrop-filter: blur(6px);
+  opacity: 0; pointer-events: none; visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s;
+  display: flex; flex-direction: column;
+}
+.community-overlay.cm-open {
+  opacity: 1; pointer-events: all; visibility: visible;
+}
+.community-modal {
+  position: absolute; inset: 0;
+  background: var(--frame-bg, #1A1038);
+  display: flex; flex-direction: column;
+  transform: translateY(100%) scale(0.97);
+  transition: transform 0.38s cubic-bezier(0.25,1,0.5,1);
+  will-change: transform;
+}
+.community-overlay.cm-open .community-modal {
+  transform: translateY(0) scale(1);
+}
+
+/* Top bar */
+.cm-topbar {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 18px 12px;
+  border-bottom: 1px solid var(--card-border, rgba(123,79,212,0.25));
+  flex-shrink: 0;
+}
+.cm-title {
+  display: flex; align-items: center; gap: 8px;
+  font-family: 'Syne', sans-serif; font-size: 17px;
+  font-weight: 800; color: var(--text-primary, #fff);
+}
+.cm-close {
+  width: 30px; height: 30px; border-radius: 50%;
+  background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.1);
+  color: var(--text-muted, #8888AA); font-size: 14px;
+  cursor: pointer; display: flex; align-items: center; justify-content: center;
+  transition: all 0.18s;
+}
+.cm-close:hover { background: rgba(239,68,68,0.2); color: #EF4444; border-color: rgba(239,68,68,0.3); }
+
+/* Two-col body */
+.cm-body {
+  display: flex; flex: 1; overflow: hidden; gap: 0;
+}
+
+/* Left: leaderboard */
+.cm-left {
+  width: 33%; flex-shrink: 0;
+  border-right: 1px solid var(--card-border, rgba(123,79,212,0.2));
+  display: flex; flex-direction: column; padding: 14px 12px;
+  overflow: hidden;
+}
+
+/* Right: connections */
+.cm-right {
+  flex: 1; display: flex; flex-direction: column;
+  padding: 14px 14px 0; overflow: hidden;
+}
+
+/* Shared panel title */
+.cm-panel-title {
+  display: flex; align-items: center; gap: 6px;
+  font-family: 'Syne', sans-serif; font-size: 12px;
+  font-weight: 700; color: var(--text-primary, #fff);
+  text-transform: uppercase; letter-spacing: 0.07em;
+  margin-bottom: 10px;
+}
+
+/* Leaderboard search */
+.cm-lb-search-wrap { margin-bottom: 10px; }
+.cm-lb-search {
+  width: 100%; padding: 8px 10px;
+  background: rgba(0,0,0,0.25);
+  border: 1px solid var(--card-border, rgba(123,79,212,0.2));
+  border-radius: 8px; color: var(--text-primary, #fff);
+  font-size: 12px; outline: none;
+  transition: border-color 0.18s;
+}
+.cm-lb-search:focus { border-color: var(--accent, #7B4FD4); }
+.cm-lb-search::placeholder { color: var(--text-muted, #8888AA); }
+
+/* Leaderboard list */
+.cm-lb-list {
+  flex: 1; overflow-y: auto; scrollbar-width: thin;
+  scrollbar-color: rgba(123,79,212,0.3) transparent;
+}
+.cm-lb-list::-webkit-scrollbar { width: 3px; }
+.cm-lb-list::-webkit-scrollbar-thumb { background: rgba(123,79,212,0.3); border-radius: 10px; }
+
+/* Leaderboard row */
+.cm-lb-row {
+  display: flex; align-items: center; gap: 8px;
+  padding: 7px 6px; border-radius: 9px;
+  cursor: default; transition: background 0.15s;
+}
+.cm-lb-row:hover { background: rgba(255,255,255,0.04); }
+.cm-lb-row.cm-you {
+  background: rgba(123,79,212,0.15);
+  border: 1px solid rgba(123,79,212,0.35);
+}
+.cm-lb-rank {
+  font-family: 'Syne', sans-serif; font-size: 12px;
+  font-weight: 800; color: var(--text-muted, #8888AA);
+  min-width: 20px; text-align: center;
+}
+.cm-lb-rank.gold  { color: #F59E0B; }
+.cm-lb-rank.silver { color: #94A3B8; }
+.cm-lb-rank.bronze { color: #CD7C3A; }
+.cm-lb-av {
+  width: 26px; height: 26px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 10px; font-weight: 700; color: #fff; flex-shrink: 0;
+}
+.cm-lb-info { flex: 1; min-width: 0; }
+.cm-lb-name {
+  font-size: 11px; font-weight: 600;
+  color: var(--text-muted, #C0C0E0);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.cm-lb-name.you-name { color: var(--text-primary, #fff); }
+.cm-lb-score { font-size: 10px; color: var(--text-muted, #8888AA); }
+.cm-lb-pts {
+  font-family: 'Syne', sans-serif; font-size: 11px;
+  font-weight: 700; color: var(--accent-light, #9B6FF4);
+}
+
+/* Right tabs */
+.cm-tabs {
+  display: flex; gap: 4px; margin-bottom: 12px;
+  border-bottom: 1px solid var(--card-border, rgba(123,79,212,0.2));
+  padding-bottom: 8px; flex-shrink: 0;
+}
+.cm-tab {
+  display: flex; align-items: center; gap: 5px;
+  padding: 6px 12px; border-radius: 8px;
+  font-size: 12px; font-weight: 600;
+  color: var(--text-muted, #8888AA);
+  background: transparent; border: 1px solid transparent;
+  cursor: pointer; transition: all 0.18s; white-space: nowrap;
+}
+.cm-tab:hover { color: var(--text-primary, #fff); background: rgba(255,255,255,0.05); }
+.cm-tab.active {
+  color: var(--accent-light, #9B6FF4);
+  background: rgba(123,79,212,0.18);
+  border-color: rgba(123,79,212,0.35);
+}
+.cm-tab-badge {
+  background: rgba(123,79,212,0.3); color: var(--accent-light, #9B6FF4);
+  border-radius: 10px; font-size: 10px; padding: 1px 6px;
+}
+.cm-tab-badge-orange { background: rgba(249,115,22,0.25); color: #F97316; }
+
+/* Tab panels */
+.cm-tab-panel { display: none; flex: 1; overflow: hidden; flex-direction: column; }
+.cm-tab-panel.active { display: flex; }
+
+/* Connections list */
+.cm-conn-list {
+  flex: 1; overflow-y: auto; display: flex;
+  flex-direction: column; gap: 8px;
+  padding-right: 4px; padding-bottom: 16px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(123,79,212,0.3) transparent;
+}
+.cm-conn-list::-webkit-scrollbar { width: 3px; }
+.cm-conn-list::-webkit-scrollbar-thumb { background: rgba(123,79,212,0.3); border-radius: 10px; }
+
+/* Connection card */
+.cm-conn-card {
+  display: flex; align-items: center; gap: 10px;
+  background: var(--card-bg, rgba(30,16,80,0.5));
+  border: 1px solid var(--card-border, rgba(123,79,212,0.2));
+  border-radius: 12px; padding: 10px 12px;
+  transition: all 0.18s;
+}
+.cm-conn-card:hover { border-color: rgba(123,79,212,0.45); }
+.cm-conn-av {
+  width: 36px; height: 36px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px; font-weight: 700; color: #fff; flex-shrink: 0;
+  position: relative;
+}
+.cm-status-dot {
+  position: absolute; bottom: 1px; right: 1px;
+  width: 9px; height: 9px; border-radius: 50%;
+  border: 1.5px solid var(--frame-bg, #1A1038);
+}
+.cm-status-dot.online { background: #10B981; }
+.cm-status-dot.offline { background: #555577; }
+.cm-conn-info { flex: 1; min-width: 0; }
+.cm-conn-name {
+  font-size: 13px; font-weight: 700;
+  color: var(--text-primary, #fff);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.cm-conn-meta { font-size: 11px; color: var(--text-muted, #8888AA); margin-top: 2px; }
+.cm-conn-actions { display: flex; gap: 6px; }
+
+/* Action buttons */
+.cm-btn {
+  padding: 5px 12px; border-radius: 8px;
+  font-size: 11px; font-weight: 700; cursor: pointer;
+  border: 1px solid; transition: all 0.18s; white-space: nowrap;
+}
+.cm-btn-accept {
+  background: rgba(16,185,129,0.2);
+  border-color: rgba(16,185,129,0.4);
+  color: #10B981;
+}
+.cm-btn-accept:hover { background: rgba(16,185,129,0.35); }
+.cm-btn-reject {
+  background: rgba(239,68,68,0.12);
+  border-color: rgba(239,68,68,0.3);
+  color: #EF4444;
+}
+.cm-btn-reject:hover { background: rgba(239,68,68,0.25); }
+.cm-btn-add {
+  background: rgba(123,79,212,0.2);
+  border-color: rgba(123,79,212,0.45);
+  color: var(--accent-light, #9B6FF4);
+}
+.cm-btn-add:hover { background: rgba(123,79,212,0.35); }
+.cm-btn-sent {
+  background: rgba(136,136,170,0.12);
+  border-color: rgba(136,136,170,0.25);
+  color: var(--text-muted, #8888AA);
+  cursor: default;
+}
+.cm-btn-remove {
+  background: rgba(239,68,68,0.08);
+  border-color: rgba(239,68,68,0.2);
+  color: #EF4444;
+}
+.cm-btn-remove:hover { background: rgba(239,68,68,0.2); }
+
+/* Add-person search row */
+.cm-search-row { display: flex; gap: 8px; margin-bottom: 12px; }
+.cm-user-search {
+  flex: 1; padding: 9px 12px;
+  background: rgba(0,0,0,0.25);
+  border: 1px solid var(--card-border, rgba(123,79,212,0.2));
+  border-radius: 10px; color: var(--text-primary, #fff);
+  font-size: 13px; outline: none; transition: border-color 0.18s;
+}
+.cm-user-search:focus { border-color: var(--accent, #7B4FD4); }
+.cm-user-search::placeholder { color: var(--text-muted, #8888AA); }
+.cm-search-btn {
+  display: flex; align-items: center; gap: 6px;
+  padding: 9px 14px; border-radius: 10px;
+  background: linear-gradient(135deg, var(--accent,#7B4FD4), var(--pink,#C875C4));
+  border: none; color: #fff; font-size: 12px;
+  font-weight: 700; cursor: pointer; white-space: nowrap;
+  transition: opacity 0.18s;
+}
+.cm-search-btn:hover { opacity: 0.88; }
+.cm-search-btn:active { opacity: 0.75; }
+
+/* Loading + empty states */
+.cm-loading {
+  text-align: center; color: var(--text-muted, #8888AA);
+  font-size: 13px; padding: 24px 0;
+}
+.cm-empty-state {
+  text-align: center; color: var(--text-muted, #8888AA);
+  font-size: 12px; padding: 28px 16px; line-height: 1.6;
+}
+</style>
 </head>
 <body>
 
-<div class="phone-wrap">
-  <div class="phone-frame">
-    <div class="notch"></div>
-    <div class="toast" id="toast"></div>
+<!-- Mobile sidebar toggle -->
+<button class="sidebar-mobile-toggle" onclick="toggleSidebar()" id="sidebarToggle">☰</button>
+
+<!-- Desktop Shell -->
+<div class="desktop-shell">
+
+  <!-- ══ SIDEBAR ══ -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+      <div>
+        <div class="sidebar-logo-text">Skill<span>Sync</span></div>
+        <div class="sidebar-logo-badge">v1.0</div>
+      </div>
+    </div>
+
+    <div class="sidebar-trial" id="sidebar-trial-box">
+      <div class="sidebar-trial-text">Pro trial · <strong id="sidebar-streak-days">—</strong> day streak 🔥</div>
+      <button class="sidebar-trial-btn" onclick="openModal('resumeModal')">📄 Analyze Resume</button>
+    </div>
+
+    <div class="sidebar-section-label">Workspace</div>
+    <nav class="sidebar-nav">
+      <button class="sidebar-item active" data-screen="s2" onclick="sidebarNav('s2',this)">
+        <span class="sidebar-item-icon">🏠</span> Dashboard
+      </button>
+      <button class="sidebar-item" data-screen="s3" onclick="sidebarNav('s3',this)">
+        <span class="sidebar-item-icon">🧪</span> Skill Tests
+      </button>
+      <button class="sidebar-item" data-screen="s4" onclick="sidebarNav('s4',this)">
+        <span class="sidebar-item-icon">🗺️</span> Roadmap
+      </button>
+      <button class="sidebar-item" data-screen="s5" onclick="sidebarNav('s5',this)">
+        <span class="sidebar-item-icon">💼</span> Job Matches
+        <span class="sidebar-item-badge" id="sb-jobs-badge">New</span>
+      </button>
+    </nav>
+
+    <div class="sidebar-section-label">Practice</div>
+    <nav class="sidebar-nav">
+      <button class="sidebar-item" data-screen="s6" onclick="sidebarNav('s6',this)">
+        <span class="sidebar-item-icon">🤖</span> AI Coach
+      </button>
+      <button class="sidebar-item" data-screen="s7" onclick="sidebarNav('s7',this)">
+        <span class="sidebar-item-icon">🎤</span> Mock Interview
+      </button>
+      <button class="sidebar-item" data-screen="s9" onclick="sidebarNav('s9',this)">
+        <span class="sidebar-item-icon">⚡</span> Daily Challenge
+      </button>
+    </nav>
+
+    <div class="sidebar-section-label">Track</div>
+    <nav class="sidebar-nav">
+      <button class="sidebar-item" data-screen="s10" onclick="sidebarNav('s10',this)">
+        <span class="sidebar-item-icon">📋</span> Applications
+      </button>
+      <button class="sidebar-item" data-screen="s11" onclick="sidebarNav('s11',this)">
+        <span class="sidebar-item-icon">📊</span> Analytics
+      </button>
+      <button class="sidebar-item" data-screen="s8" onclick="sidebarNav('s8',this)">
+        <span class="sidebar-item-icon">🏆</span> Achievements
+      </button>
+    </nav>
+
+    <div class="sidebar-section-label">Community</div>
+    <nav class="sidebar-nav">
+      <button class="sidebar-item" id="sb-community-btn" onclick="openCommunityModal('connections')">
+        <span class="sidebar-item-icon">👥</span> Community
+        <span class="sidebar-item-badge" id="sb-community-badge" style="display:none">●</span>
+      </button>
+    </nav>
+
+    <div class="sidebar-divider"></div>
+    <nav class="sidebar-nav" style="margin-bottom:8px">
+      <button class="sidebar-item" onclick="openThemePanel()">
+        <span class="sidebar-item-icon">🎨</span> Appearance
+      </button>
+    </nav>
+
+    <div class="sidebar-user">
+      <div class="sidebar-user-avatar" id="sb-avatar" onclick="openModal('resumeModal')">?</div>
+      <div>
+        <div class="sidebar-user-name" id="sb-username">Guest</div>
+        <div class="sidebar-user-role" id="sb-role">Hobby plan</div>
+      </div>
+      <button class="sidebar-user-logout" onclick="logoutUser()">Sign out</button>
+    </div>
+  </aside>
+
+  <!-- ══ MAIN AREA ══ -->
+  <div class="main-area">
+
+    <!-- Top bar -->
+    <div class="topbar" id="main-topbar">
+      <div class="topbar-search">
+        <span style="font-size:13px;color:#444">🔍</span>
+        <input type="text" placeholder="Search anything…" id="topbar-search-input" onkeydown="handleTopbarSearch(event)">
+        <span style="font-size:10px;color:#333;background:#1A1A1A;padding:2px 6px;border-radius:4px;border:1px solid #222">⌘K</span>
+      </div>
+      <div class="topbar-actions">
+        <div class="topbar-streak" id="topbar-streak">🔥 — day streak</div>
+        <button class="topbar-btn" onclick="openModal('resumeModal')">📄 Resume</button>
+        <button class="topbar-btn primary" onclick="sidebarNav('s6',null)">Run AI assessment</button>
+      </div>
+    </div>
+
+    <!-- Page view — all screens live here -->
+    <div class="page-view">
+      <div class="phone-wrap">
+        <div class="phone-frame">
+          <div class="notch"></div>
+          <div class="toast" id="toast"></div>
 
     <!-- ════ MODAL: RESUME PARSER ════ -->
     <div class="modal-overlay" id="resumeModal">
@@ -1091,14 +2673,30 @@ async function ensurePuterAuth() {
             <div class="stat-card fade-in-4" onclick="showToast('🔥 Keep your streak going!')"><div class="stat-icon">🔥</div><div class="stat-num" id="stat-streak">1</div><div class="stat-label">Day Streak</div></div>
           </div>
 
-          <!-- Leaderboard Hub -->
-          <div class="leaderboard-wrap">
-            <div class="lb-header">
-              <div class="lb-title">🏆 Leaderboard</div>
-              <div class="lb-badge" id="lb-your-rank">Your rank: —</div>
+          <!-- ═══ COMMUNITY BAR (replaces old leaderboard) ═══ -->
+          <div class="community-bar" id="communityBar" onclick="openCommunityModal()" role="button" tabindex="0" aria-label="Open Community">
+            <div class="cb-left">
+              <div class="cb-icon-wrap">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              </div>
+              <div>
+                <div class="cb-title">Community</div>
+                <div class="cb-sub" id="cb-sub-text">Connect · Compete · Grow</div>
+              </div>
             </div>
-            <div id="lb-rows"></div>
+            <div class="cb-right">
+              <div class="cb-tab active" id="cb-tab-connections" onclick="event.stopPropagation();openCommunityModal('connections')">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                Connections
+              </div>
+              <div class="cb-tab" id="cb-tab-leaderboard" onclick="event.stopPropagation();openCommunityModal('leaderboard')">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+                Leaderboard
+              </div>
+              <div class="cb-chevron">›</div>
+            </div>
           </div>
+          <!-- ═══ END COMMUNITY BAR ═══ -->
 
           <!-- Zero to Hero tracker -->
           <div class="sec-title">Zero to Hero Progress</div>
@@ -1263,6 +2861,95 @@ async function ensurePuterAuth() {
         <div class="nav-item" onclick="goTo('s6')"><div class="nav-icon">🤖</div><div class="nav-label">AI Chat</div></div>
       </div>
     </div>
+
+    <!-- ════ COMMUNITY MODAL (full-screen overlay, inside phone-frame) ════ -->
+    <div class="community-overlay" id="communityOverlay" onclick="handleCommunityOverlayClick(event)">
+      <div class="community-modal" id="communityModal">
+
+        <!-- Top bar -->
+        <div class="cm-topbar">
+          <div class="cm-title">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            Community
+          </div>
+          <button class="cm-close" onclick="closeCommunityModal()" aria-label="Close">✕</button>
+        </div>
+
+        <!-- Body: two-column layout -->
+        <div class="cm-body">
+
+          <!-- ── LEFT PANEL: Leaderboard ── -->
+          <div class="cm-left">
+            <div class="cm-panel-title">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+              Global Leaderboard
+            </div>
+            <div class="cm-lb-search-wrap">
+              <input class="cm-lb-search" id="cm-lb-search" type="text" placeholder="Search users…" oninput="filterLeaderboard(this.value)">
+            </div>
+            <div class="cm-lb-list" id="cm-lb-list">
+              <div class="cm-loading">Loading…</div>
+            </div>
+          </div>
+
+          <!-- ── RIGHT PANEL: Connections ── -->
+          <div class="cm-right">
+            <!-- Tabs -->
+            <div class="cm-tabs">
+              <button class="cm-tab active" id="cm-tab-all" onclick="switchCmTab('all')">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                All Connections
+                <span class="cm-tab-badge" id="cm-tab-badge-all">0</span>
+              </button>
+              <button class="cm-tab" id="cm-tab-requests" onclick="switchCmTab('requests')">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                Requests
+                <span class="cm-tab-badge cm-tab-badge-orange" id="cm-tab-badge-req" style="display:none">0</span>
+              </button>
+              <button class="cm-tab" id="cm-tab-add" onclick="switchCmTab('add')">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                Add Person
+              </button>
+            </div>
+
+            <!-- Tab: All Connections -->
+            <div class="cm-tab-panel active" id="cm-panel-all">
+              <div class="cm-conn-list" id="cm-conn-list">
+                <div class="cm-loading">Loading connections…</div>
+              </div>
+            </div>
+
+            <!-- Tab: Requests -->
+            <div class="cm-tab-panel" id="cm-panel-requests">
+              <div class="cm-panel-title" style="margin:0 0 12px">Pending Requests</div>
+              <div class="cm-conn-list" id="cm-req-list">
+                <div class="cm-loading">Loading…</div>
+              </div>
+            </div>
+
+            <!-- Tab: Add Person -->
+            <div class="cm-tab-panel" id="cm-panel-add">
+              <div class="cm-panel-title" style="margin:0 0 14px">Find Friends</div>
+              <div class="cm-search-row">
+                <input class="cm-user-search" id="cm-user-search-input" type="text" placeholder="Enter username to search…" onkeydown="if(event.key==='Enter')searchUsers()">
+                <button class="cm-search-btn" onclick="searchUsers()">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                  Search
+                </button>
+              </div>
+              <div class="cm-conn-list" id="cm-search-results">
+                <div class="cm-empty-state">
+                  <div style="font-size:32px;margin-bottom:10px">🔍</div>
+                  <div>Search for users by username to send them a friend request.</div>
+                </div>
+              </div>
+            </div>
+
+          </div><!-- /cm-right -->
+        </div><!-- /cm-body -->
+      </div><!-- /community-modal -->
+    </div><!-- /community-overlay -->
+    <!-- ════ END COMMUNITY MODAL ════ -->
 
     <!-- ════ SCREEN 3: SKILL TEST ════ -->
     <div class="screen" id="s3">
@@ -1480,8 +3167,7 @@ async function ensurePuterAuth() {
       </div>
     </div>
 
-  </div><!-- phone-frame -->
-</div><!-- phone-wrap -->
+  <!-- original closing tags moved to end of file -->
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 <script>
@@ -5479,200 +7165,668 @@ document.addEventListener('DOMContentLoaded', function() {
   if (_currentTheme && _currentTheme !== 'default') applyTheme(_currentTheme);
 });
 // ──────────────────────────────────────────────
+
+// ══════════════════════════════════════════════
+// DESKTOP SIDEBAR LOGIC
+// ══════════════════════════════════════════════
+
+// Sidebar navigation — mirrors goTo() but also updates sidebar active state
+function sidebarNav(screenId, btn) {
+  goTo(screenId);
+  // Update active state
+  document.querySelectorAll('.sidebar-item[data-screen]').forEach(el => el.classList.remove('active'));
+  if (btn) {
+    btn.classList.add('active');
+  } else {
+    const match = document.querySelector(`.sidebar-item[data-screen="${screenId}"]`);
+    if (match) match.classList.add('active');
+  }
+  // On mobile, close sidebar after nav
+  if (window.innerWidth <= 768) {
+    document.getElementById('sidebar').classList.remove('open');
+  }
+  // Trigger screen-specific renders
+  if (screenId === 's8') renderAchievements();
+  if (screenId === 's9') renderDailyChallenge();
+  if (screenId === 's10') renderKanban();
+  if (screenId === 's11') renderAnalytics();
+  if (screenId === 's4') setTimeout(() => document.getElementById('rm-overlay').classList.add('active'), 200);
+  if (screenId === 's6') setTimeout(() => initChatGreeting(), 100);
+  if (screenId === 's7') {
+    document.getElementById('iv-start-panel').style.display = 'block';
+    document.getElementById('iv-active-panel').style.display = 'none';
+    document.getElementById('iv-results-panel').style.display = 'none';
+  }
+}
+
+// Mobile sidebar toggle
+function toggleSidebar() {
+  document.getElementById('sidebar').classList.toggle('open');
+}
+
+// Update sidebar user info when user logs in
+AppState.subscribe('userChanged', function(user) {
+  if (!user) {
+    document.getElementById('sb-avatar').textContent = '?';
+    document.getElementById('sb-username').textContent = 'Guest';
+    document.getElementById('sb-role').textContent = 'Not signed in';
+    document.getElementById('topbar-streak').textContent = '🔥 — day streak';
+    document.getElementById('sidebar-streak-days').textContent = '—';
+    return;
+  }
+  const initials = (user.name || user.username || 'U').substring(0, 2).toUpperCase();
+  document.getElementById('sb-avatar').textContent = initials;
+  document.getElementById('sb-username').textContent = user.name || user.username;
+  const domain = (user.domains || ['Hobby'])[0];
+  const exp = user.experience || 'Beginner';
+  document.getElementById('sb-role').textContent = `${exp} · ${domain}`;
+  const streak = user.streak || 1;
+  document.getElementById('topbar-streak').textContent = `🔥 ${streak} day streak`;
+  document.getElementById('sidebar-streak-days').textContent = streak;
+});
+
+// Topbar search — navigate to relevant screen
+function handleTopbarSearch(e) {
+  if (e.key !== 'Enter') return;
+  const q = e.target.value.toLowerCase().trim();
+  if (!q) return;
+  if (q.includes('job') || q.includes('match')) sidebarNav('s5', null);
+  else if (q.includes('road') || q.includes('learn')) sidebarNav('s4', null);
+  else if (q.includes('test') || q.includes('quiz') || q.includes('skill')) sidebarNav('s3', null);
+  else if (q.includes('chat') || q.includes('coach') || q.includes('ai')) sidebarNav('s6', null);
+  else if (q.includes('interview')) sidebarNav('s7', null);
+  else if (q.includes('challenge') || q.includes('code')) sidebarNav('s9', null);
+  else if (q.includes('badge') || q.includes('achieve')) sidebarNav('s8', null);
+  else if (q.includes('analyt') || q.includes('progress')) sidebarNav('s11', null);
+  else if (q.includes('tracker') || q.includes('applic')) sidebarNav('s10', null);
+  else if (q.includes('resume')) openModal('resumeModal');
+  else showToast('🔍 Showing dashboard');
+  e.target.value = '';
+}
+
+// Override goTo to also sync sidebar active state
+const _origGoTo = goTo;
+// Patch goTo so sidebar tracks navigation even when called directly (e.g. back buttons)
+const _goToPatched = function(id) {
+  _origGoTo(id);
+  document.querySelectorAll('.sidebar-item[data-screen]').forEach(el => {
+    el.classList.toggle('active', el.getAttribute('data-screen') === id);
+  });
+};
+// Replace all back-button goTo calls silently — just update sidebar highlight
+document.addEventListener('click', function(e) {
+  // Watch for any element that calls goTo via onclick
+  const el = e.target.closest('[onclick]');
+  if (!el) return;
+  const fn = el.getAttribute('onclick') || '';
+  const match = fn.match(/goTo\('([^']+)'\)/);
+  if (match) {
+    setTimeout(() => {
+      document.querySelectorAll('.sidebar-item[data-screen]').forEach(item => {
+        item.classList.toggle('active', item.getAttribute('data-screen') === match[1]);
+      });
+    }, 50);
+  }
+});
+
+// On auth screens hide sidebar; show it once on dashboard
+AppState.subscribe('userChanged', function(user) {
+  const sidebar = document.getElementById('sidebar');
+  const mainArea = document.querySelector('.main-area');
+  if (user) {
+    sidebar.style.display = '';
+    if (mainArea) mainArea.style.marginLeft = '';
+  } else {
+    // Keep sidebar visible even on auth screens for consistent layout
+    sidebar.style.display = '';
+  }
+});
+
+// On auth screens hide sidebar; show it once on dashboard
+AppState.subscribe('userChanged', function(user) {
+  const sidebar = document.getElementById('sidebar');
+  const mainArea = document.querySelector('.main-area');
+  if (user) {
+    sidebar.style.display = '';
+    if (mainArea) mainArea.style.marginLeft = '';
+  } else {
+    // Keep sidebar visible even on auth screens for consistent layout
+    sidebar.style.display = '';
+  }
+});
+
+// Show auth screens centered (no sidebar offset needed — CSS handles it for small content)
+// The sidebar stays visible even on splash/auth pages matching Lovable's persistent nav pattern
+
+// ══════════════════════════════════════════════════════════════
+// COMMUNITY FEATURE — Connections, Leaderboard, Friend Requests
+// ══════════════════════════════════════════════════════════════
+
+// ── State ─────────────────────────────────────────────────────
+const Community = {
+  currentTab: 'all',        // 'all' | 'requests' | 'add'
+  friends: [],              // accepted friendships
+  pendingIncoming: [],      // requests sent TO me
+  pendingOutgoing: [],      // requests I sent
+  leaderboard: [],          // full lb data
+  lbFiltered: [],           // filtered copy
+  realtimeSub: null,        // Supabase realtime channel
+  searchResults: [],        // user-search results
+};
+
+// ── Helper: get current Supabase user id ─────────────────────
+function getCommunityUserId() {
+  const user = AppState.getUser();
+  // Prefer Supabase UID stored on user object; fall back to username as a key
+  return user?.supabase_uid || user?.id || user?.username || null;
+}
+function getCommunityUsername() {
+  const user = AppState.getUser();
+  return user?.username || user?.name || 'You';
+}
+
+// ── Avatar gradient helper ────────────────────────────────────
+const AV_COLORS = [
+  'linear-gradient(135deg,#7B4FD4,#C875C4)',
+  'linear-gradient(135deg,#3B82F6,#06B6D4)',
+  'linear-gradient(135deg,#10B981,#34D399)',
+  'linear-gradient(135deg,#F97316,#FBBF24)',
+  'linear-gradient(135deg,#EF4444,#F97316)',
+  'linear-gradient(135deg,#8B5CF6,#EC4899)',
+];
+function avColor(str) {
+  let h = 0;
+  for (let i = 0; i < (str||'').length; i++) h = (h * 31 + str.charCodeAt(i)) & 0xFFFFFF;
+  return AV_COLORS[Math.abs(h) % AV_COLORS.length];
+}
+function avInitials(name) {
+  return (name || '?').substring(0, 2).toUpperCase();
+}
+
+// ── Open / Close modal ─────────────────────────────────────────
+function openCommunityModal(startTab) {
+  const overlay = document.getElementById('communityOverlay');
+  if (!overlay) return;
+  overlay.classList.add('cm-open');
+  // Switch to requested tab
+  switchCmTab(startTab || Community.currentTab || 'all');
+  // Load data
+  loadCommunityData();
+}
+function closeCommunityModal() {
+  const overlay = document.getElementById('communityOverlay');
+  if (overlay) overlay.classList.remove('cm-open');
+}
+function handleCommunityOverlayClick(e) {
+  // Close if clicking the backdrop (not the modal itself)
+  if (e.target === document.getElementById('communityOverlay')) closeCommunityModal();
+}
+
+// ── Tab switching ──────────────────────────────────────────────
+function switchCmTab(tab) {
+  Community.currentTab = tab;
+  ['all','requests','add'].forEach(t => {
+    document.getElementById('cm-tab-' + t)?.classList.toggle('active', t === tab);
+    document.getElementById('cm-panel-' + t)?.classList.toggle('active', t === tab);
+  });
+}
+
+// ── Main data loader ──────────────────────────────────────────
+async function loadCommunityData() {
+  await Promise.all([
+    loadLeaderboard(),
+    loadConnections(),
+  ]);
+  subscribeRealtime();
+}
+
+// ── LEADERBOARD ────────────────────────────────────────────────
+async function loadLeaderboard() {
+  const listEl = document.getElementById('cm-lb-list');
+  if (!listEl) return;
+  listEl.innerHTML = '<div class="cm-loading">Loading leaderboard…</div>';
+
+  try {
+    const sb = getSB();
+    // Pull top 50 users ordered by xp/score
+    const { data, error } = await sb
+      .from('profiles')
+      .select('id, username, display_name, xp, streak, avatar_color')
+      .order('xp', { ascending: false })
+      .limit(50);
+
+    if (error) throw error;
+
+    // Fallback: if profiles table doesn't exist yet, use mock data
+    const rows = data?.length ? data : getMockLeaderboard();
+
+    Community.leaderboard = rows.map((u, i) => ({ ...u, rank: i + 1 }));
+    Community.lbFiltered = [...Community.leaderboard];
+
+    renderLeaderboard();
+  } catch(e) {
+    // Graceful fallback to mock data so UI always works
+    Community.leaderboard = getMockLeaderboard().map((u, i) => ({ ...u, rank: i + 1 }));
+    Community.lbFiltered = [...Community.leaderboard];
+    renderLeaderboard();
+  }
+}
+
+function getMockLeaderboard() {
+  const currentUser = getCommunityUsername();
+  const names = ['Alex Rivera','Sam Chen','Jordan Park','Casey Lee','Morgan Wu','Taylor Kim','Riley Zhang','Avery Patel','Drew Nakamura','Quinn Sharma'];
+  return [
+    { id: 'mock-you', username: currentUser, display_name: currentUser, xp: 980, streak: AppState.getUser()?.streak || 1, _isYou: true },
+    ...names.map((n, i) => ({
+      id: 'mock-' + i,
+      username: n.replace(' ','').toLowerCase(),
+      display_name: n,
+      xp: Math.max(50, 920 - i * 78 - Math.floor(Math.random() * 30)),
+      streak: Math.floor(Math.random() * 20) + 1,
+    }))
+  ].sort((a, b) => b.xp - a.xp);
+}
+
+function renderLeaderboard() {
+  const listEl = document.getElementById('cm-lb-list');
+  if (!listEl) return;
+  const meId = getCommunityUserId();
+  const meUsername = getCommunityUsername();
+
+  if (!Community.lbFiltered.length) {
+    listEl.innerHTML = '<div class="cm-empty-state">No users found.</div>';
+    return;
+  }
+
+  listEl.innerHTML = Community.lbFiltered.map((u, i) => {
+    const rank = u.rank || (i + 1);
+    const isYou = u._isYou || u.username === meUsername || u.id === meId;
+    const rankClass = rank === 1 ? 'gold' : rank === 2 ? 'silver' : rank === 3 ? 'bronze' : '';
+    const rankDisplay = rank <= 3 ? ['🥇','🥈','🥉'][rank-1] : '#' + rank;
+    const name = u.display_name || u.username || 'User';
+    const pts = (u.xp || 0).toLocaleString();
+    const bg = u.avatar_color || avColor(name);
+    return `
+      <div class="cm-lb-row ${isYou ? 'cm-you' : ''}">
+        <div class="cm-lb-rank ${rankClass}">${rankDisplay}</div>
+        <div class="cm-lb-av" style="background:${bg}">${avInitials(name)}</div>
+        <div class="cm-lb-info">
+          <div class="cm-lb-name ${isYou ? 'you-name' : ''}">${name}${isYou ? ' (you)' : ''}</div>
+          <div class="cm-lb-score">🔥 ${u.streak || 1} day streak</div>
+        </div>
+        <div class="cm-lb-pts">${pts} XP</div>
+      </div>`;
+  }).join('');
+
+  // Update community bar sub-text with your rank
+  const myEntry = Community.leaderboard.find(u => u._isYou || u.username === meUsername || u.id === meId);
+  if (myEntry) {
+    const subEl = document.getElementById('cb-sub-text');
+    if (subEl) subEl.textContent = `Rank #${myEntry.rank} · ${Community.friends.length} connections`;
+  }
+}
+
+function filterLeaderboard(query) {
+  const q = (query || '').toLowerCase().trim();
+  Community.lbFiltered = q
+    ? Community.leaderboard.filter(u =>
+        (u.display_name || '').toLowerCase().includes(q) ||
+        (u.username || '').toLowerCase().includes(q))
+    : [...Community.leaderboard];
+  renderLeaderboard();
+}
+
+// ── CONNECTIONS ────────────────────────────────────────────────
+async function loadConnections() {
+  const meId = getCommunityUserId();
+  if (!meId) {
+    renderConnectionsList();
+    renderRequestsList();
+    return;
+  }
+
+  try {
+    const sb = getSB();
+    const { data, error } = await sb
+      .from('friendships')
+      .select(`
+        id, status, created_at,
+        user_id, friend_id,
+        user:profiles!friendships_user_id_fkey(id, username, display_name, xp, streak, avatar_color, last_seen),
+        friend:profiles!friendships_friend_id_fkey(id, username, display_name, xp, streak, avatar_color, last_seen)
+      `)
+      .or(`user_id.eq.${meId},friend_id.eq.${meId}`);
+
+    if (error) throw error;
+
+    Community.friends = [];
+    Community.pendingIncoming = [];
+    Community.pendingOutgoing = [];
+
+    (data || []).forEach(row => {
+      const isUser = row.user_id === meId;
+      const other = isUser ? row.friend : row.user;
+      if (!other) return;
+
+      const entry = {
+        friendshipId: row.id,
+        status: row.status,
+        isUser,
+        other: {
+          id: other.id,
+          username: other.username,
+          name: other.display_name || other.username,
+          xp: other.xp || 0,
+          streak: other.streak || 1,
+          avatarColor: other.avatar_color || avColor(other.display_name || other.username),
+          lastSeen: other.last_seen,
+        }
+      };
+
+      if (row.status === 'accepted') {
+        Community.friends.push(entry);
+      } else if (row.status === 'pending') {
+        if (isUser) Community.pendingOutgoing.push(entry);
+        else Community.pendingIncoming.push(entry);
+      }
+    });
+  } catch(e) {
+    // friendships table may not exist yet — show empty state
+    console.log('Community: friendships table not available yet.', e.message);
+  }
+
+  renderConnectionsList();
+  renderRequestsList();
+  updateRequestBadge();
+}
+
+function isOnline(lastSeen) {
+  if (!lastSeen) return false;
+  return (Date.now() - new Date(lastSeen).getTime()) < 5 * 60 * 1000; // 5 min
+}
+
+function renderConnectionsList() {
+  const el = document.getElementById('cm-conn-list');
+  if (!el) return;
+
+  const allBadge = document.getElementById('cm-tab-badge-all');
+  if (allBadge) allBadge.textContent = Community.friends.length;
+
+  if (!Community.friends.length) {
+    el.innerHTML = `
+      <div class="cm-empty-state">
+        <div style="font-size:32px;margin-bottom:10px">🤝</div>
+        <div>No connections yet. Use the <strong>Add Person</strong> tab to find friends!</div>
+      </div>`;
+    return;
+  }
+
+  el.innerHTML = Community.friends.map(f => {
+    const { other, friendshipId } = f;
+    const online = isOnline(other.lastSeen);
+    return `
+      <div class="cm-conn-card">
+        <div class="cm-conn-av" style="background:${other.avatarColor}">
+          ${avInitials(other.name)}
+          <div class="cm-status-dot ${online ? 'online' : 'offline'}"></div>
+        </div>
+        <div class="cm-conn-info">
+          <div class="cm-conn-name">${other.name}</div>
+          <div class="cm-conn-meta">${online ? '🟢 Online' : '⚫ Offline'} · ${other.xp.toLocaleString()} XP · 🔥 ${other.streak}d</div>
+        </div>
+        <div class="cm-conn-actions">
+          <button class="cm-btn cm-btn-remove" onclick="removeFriend('${friendshipId}','${other.name}')">Remove</button>
+        </div>
+      </div>`;
+  }).join('');
+}
+
+function renderRequestsList() {
+  const el = document.getElementById('cm-req-list');
+  if (!el) return;
+
+  const allItems = [
+    ...Community.pendingIncoming.map(f => ({ ...f, direction: 'incoming' })),
+    ...Community.pendingOutgoing.map(f => ({ ...f, direction: 'outgoing' })),
+  ];
+
+  if (!allItems.length) {
+    el.innerHTML = '<div class="cm-empty-state"><div style="font-size:28px;margin-bottom:8px">📭</div><div>No pending requests.</div></div>';
+    return;
+  }
+
+  el.innerHTML = allItems.map(f => {
+    const { other, friendshipId, direction } = f;
+    const actions = direction === 'incoming'
+      ? `<button class="cm-btn cm-btn-accept" onclick="acceptRequest('${friendshipId}')">Accept</button>
+         <button class="cm-btn cm-btn-reject" onclick="rejectRequest('${friendshipId}')">Decline</button>`
+      : `<button class="cm-btn cm-btn-sent" disabled>Sent ✓</button>`;
+    return `
+      <div class="cm-conn-card">
+        <div class="cm-conn-av" style="background:${other.avatarColor}">${avInitials(other.name)}</div>
+        <div class="cm-conn-info">
+          <div class="cm-conn-name">${other.name}</div>
+          <div class="cm-conn-meta">${direction === 'incoming' ? '📩 Wants to connect' : '⏳ Request pending'}</div>
+        </div>
+        <div class="cm-conn-actions">${actions}</div>
+      </div>`;
+  }).join('');
+}
+
+function updateRequestBadge() {
+  const badge = document.getElementById('cm-tab-badge-req');
+  const count = Community.pendingIncoming.length;
+  if (badge) {
+    badge.textContent = count;
+    badge.style.display = count > 0 ? 'inline-block' : 'none';
+  }
+  // Sidebar badge
+  const sbBadge = document.getElementById('sb-community-badge');
+  if (sbBadge) {
+    sbBadge.style.display = count > 0 ? 'inline-block' : 'none';
+  }
+}
+
+// ── SEARCH USERS ───────────────────────────────────────────────
+async function searchUsers() {
+  const input = document.getElementById('cm-user-search-input');
+  const query = (input?.value || '').trim();
+  if (!query) return;
+
+  const resultsEl = document.getElementById('cm-search-results');
+  if (!resultsEl) return;
+  resultsEl.innerHTML = '<div class="cm-loading">Searching…</div>';
+
+  const meId = getCommunityUserId();
+  const myUsername = getCommunityUsername();
+
+  try {
+    const sb = getSB();
+    const { data, error } = await sb
+      .from('profiles')
+      .select('id, username, display_name, xp, streak, avatar_color')
+      .ilike('username', `%${query}%`)
+      .neq('id', meId || '')
+      .limit(15);
+
+    if (error) throw error;
+    Community.searchResults = data || [];
+  } catch(e) {
+    // Table may not exist — show a graceful message
+    resultsEl.innerHTML = `<div class="cm-empty-state"><div style="font-size:28px;margin-bottom:8px">⚠️</div><div>Profiles table not set up yet. Run the SQL schema first.</div></div>`;
+    return;
+  }
+
+  if (!Community.searchResults.length) {
+    resultsEl.innerHTML = '<div class="cm-empty-state"><div style="font-size:28px;margin-bottom:8px">🔍</div><div>No users found for "<strong>' + query + '</strong>".</div></div>';
+    return;
+  }
+
+  // Collect existing friend / pending IDs for button state
+  const friendIds = new Set(Community.friends.map(f => f.other.id));
+  const outgoingIds = new Set(Community.pendingOutgoing.map(f => f.other.id));
+  const incomingIds = new Set(Community.pendingIncoming.map(f => f.other.id));
+
+  resultsEl.innerHTML = Community.searchResults.map(u => {
+    const name = u.display_name || u.username;
+    const bg = u.avatar_color || avColor(name);
+    let btnHtml;
+    if (u.username === myUsername || u.id === meId) {
+      btnHtml = `<button class="cm-btn cm-btn-sent" disabled>You</button>`;
+    } else if (friendIds.has(u.id)) {
+      btnHtml = `<button class="cm-btn cm-btn-sent" disabled>Friends ✓</button>`;
+    } else if (outgoingIds.has(u.id)) {
+      btnHtml = `<button class="cm-btn cm-btn-sent" disabled>Sent ✓</button>`;
+    } else if (incomingIds.has(u.id)) {
+      btnHtml = `<button class="cm-btn cm-btn-accept" onclick="acceptRequestByUserId('${u.id}')">Accept</button>`;
+    } else {
+      btnHtml = `<button class="cm-btn cm-btn-add" onclick="sendFriendRequest('${u.id}','${name}',this)">+ Connect</button>`;
+    }
+    return `
+      <div class="cm-conn-card">
+        <div class="cm-conn-av" style="background:${bg}">${avInitials(name)}</div>
+        <div class="cm-conn-info">
+          <div class="cm-conn-name">${name}</div>
+          <div class="cm-conn-meta">@${u.username} · ${(u.xp||0).toLocaleString()} XP · 🔥 ${u.streak||1}d</div>
+        </div>
+        <div class="cm-conn-actions">${btnHtml}</div>
+      </div>`;
+  }).join('');
+}
+
+// ── SEND FRIEND REQUEST ────────────────────────────────────────
+async function sendFriendRequest(friendId, friendName, btnEl) {
+  const meId = getCommunityUserId();
+  if (!meId) {
+    showToast('⚠️ Please log in to connect with others.');
+    return;
+  }
+  if (btnEl) { btnEl.disabled = true; btnEl.textContent = 'Sending…'; }
+
+  try {
+    const sb = getSB();
+    const { error } = await sb.from('friendships').insert({
+      user_id: meId,
+      friend_id: friendId,
+      status: 'pending',
+    });
+    if (error) throw error;
+    if (btnEl) { btnEl.className = 'cm-btn cm-btn-sent'; btnEl.textContent = 'Sent ✓'; }
+    showToast(`✅ Friend request sent to ${friendName}!`);
+    // Optimistically add to outgoing
+    await loadConnections();
+  } catch(e) {
+    if (btnEl) { btnEl.disabled = false; btnEl.textContent = '+ Connect'; }
+    showToast('❌ Could not send request. Check schema setup.');
+    console.error('sendFriendRequest:', e);
+  }
+}
+
+// ── ACCEPT REQUEST ─────────────────────────────────────────────
+async function acceptRequest(friendshipId) {
+  try {
+    const sb = getSB();
+    const { error } = await sb.from('friendships')
+      .update({ status: 'accepted' })
+      .eq('id', friendshipId);
+    if (error) throw error;
+    showToast('🎉 Friend request accepted!');
+    await loadConnections();
+  } catch(e) {
+    showToast('❌ Could not accept request.');
+    console.error('acceptRequest:', e);
+  }
+}
+
+async function acceptRequestByUserId(senderId) {
+  const row = Community.pendingIncoming.find(f => f.other.id === senderId);
+  if (row) await acceptRequest(row.friendshipId);
+}
+
+// ── REJECT REQUEST ─────────────────────────────────────────────
+async function rejectRequest(friendshipId) {
+  try {
+    const sb = getSB();
+    const { error } = await sb.from('friendships').delete().eq('id', friendshipId);
+    if (error) throw error;
+    showToast('Request declined.');
+    await loadConnections();
+  } catch(e) {
+    showToast('❌ Could not decline request.');
+    console.error('rejectRequest:', e);
+  }
+}
+
+// ── REMOVE FRIEND ──────────────────────────────────────────────
+async function removeFriend(friendshipId, name) {
+  if (!confirm(`Remove ${name} from your connections?`)) return;
+  try {
+    const sb = getSB();
+    const { error } = await sb.from('friendships').delete().eq('id', friendshipId);
+    if (error) throw error;
+    showToast(`Removed ${name}.`);
+    await loadConnections();
+  } catch(e) {
+    showToast('❌ Could not remove connection.');
+    console.error('removeFriend:', e);
+  }
+}
+
+// ── REALTIME ───────────────────────────────────────────────────
+function subscribeRealtime() {
+  const meId = getCommunityUserId();
+  if (!meId) return;
+  // Avoid double-subscribing
+  if (Community.realtimeSub) {
+    try { getSB().removeChannel(Community.realtimeSub); } catch(e){}
+  }
+  try {
+    Community.realtimeSub = getSB()
+      .channel('community_realtime')
+      .on('postgres_changes', {
+        event: '*',
+        schema: 'public',
+        table: 'friendships',
+        filter: `friend_id=eq.${meId}`,
+      }, async (payload) => {
+        console.log('Community realtime:', payload.eventType);
+        await loadConnections();
+        if (payload.eventType === 'INSERT' && payload.new?.status === 'pending') {
+          showToast('🔔 New friend request!');
+        }
+      })
+      .subscribe();
+  } catch(e) {
+    console.log('Community realtime not available (schema may not exist yet).');
+  }
+}
+
+// ── Bootstrap on user login ────────────────────────────────────
+AppState.subscribe('userChanged', function(user) {
+  if (user) {
+    // Pre-fetch connection count for the bar badge
+    setTimeout(() => loadConnections(), 1200);
+  }
+});
+
+// ── Keyboard shortcut ──────────────────────────────────────────
+document.addEventListener('keydown', function(e) {
+  if ((e.ctrlKey || e.metaKey) && e.key === 'k') return; // let topbar handle
+  if (e.key === 'Escape') {
+    const overlay = document.getElementById('communityOverlay');
+    if (overlay && overlay.classList.contains('cm-open')) closeCommunityModal();
+  }
+});
+
 </script>
-<section style="
-  padding:4rem 2rem;
-  background:white;
-  text-align:center;">
 
-  <h2 style="color:#333;font-size:2rem;
-    margin-bottom:0.5rem;">
-    👥 Meet The Team
-  </h2>
-  <p style="color:#888;margin-bottom:3rem;">
-    Team Quadra — LNCT Group of Colleges
-  </p>
+<!-- Close desktop shell divs -->
+        </div><!-- phone-frame -->
+      </div><!-- phone-wrap -->
+    </div><!-- page-view -->
+  </div><!-- main-content equivalent -->
+  </div><!-- main-area -->
+</div><!-- desktop-shell -->
 
-  <div style="display:flex;flex-wrap:wrap;
-    gap:1.5rem;justify-content:center;">
-
-    <div style="background:#f8f9ff;
-      padding:2rem;border-radius:15px;
-      max-width:200px;width:100%;">
-      <div style="width:80px;height:80px;
-        border-radius:50%;
-        background:linear-gradient(
-        135deg,#667eea,#764ba2);
-        display:flex;align-items:center;
-        justify-content:center;
-        margin:0 auto 1rem;
-        font-size:2rem;color:white;
-        font-weight:bold;">P</div>
-      <h3 style="color:#333;">Pranay Verma</h3>
-      <p style="color:#667eea;">Team Leader</p>
-      <p style="color:#888;font-size:0.85rem;">
-        Full Stack Developer</p>
-    </div>
-
-    <div style="background:#f8f9ff;
-      padding:2rem;border-radius:15px;
-      max-width:200px;width:100%;">
-      <div style="width:80px;height:80px;
-        border-radius:50%;
-        background:linear-gradient(
-        135deg,#f093fb,#f5576c);
-        display:flex;align-items:center;
-        justify-content:center;
-        margin:0 auto 1rem;
-        font-size:2rem;color:white;
-        font-weight:bold;">P</div>
-      <h3 style="color:#333;">Pratham</h3>
-      <p style="color:#667eea;">AI/ML Engineer</p>
-      <p style="color:#888;font-size:0.85rem;">
-        ML Model Developer</p>
-    </div>
-
-    <div style="background:#f8f9ff;
-      padding:2rem;border-radius:15px;
-      max-width:200px;width:100%;">
-      <div style="width:80px;height:80px;
-        border-radius:50%;
-        background:linear-gradient(
-        135deg,#4facfe,#00f2fe);
-        display:flex;align-items:center;
-        justify-content:center;
-        margin:0 auto 1rem;
-        font-size:2rem;color:white;
-        font-weight:bold;">M</div>
-      <h3 style="color:#333;">Member 3</h3>
-      <p style="color:#667eea;">UI/UX Designer</p>
-      <p style="color:#888;font-size:0.85rem;">
-        Frontend Developer</p>
-    </div>
-
-    <div style="background:#f8f9ff;
-      padding:2rem;border-radius:15px;
-      max-width:200px;width:100%;">
-      <div style="width:80px;height:80px;
-        border-radius:50%;
-        background:linear-gradient(
-        135deg,#43e97b,#38f9d7);
-        display:flex;align-items:center;
-        justify-content:center;
-        margin:0 auto 1rem;
-        font-size:2rem;color:white;
-        font-weight:bold;">M</div>
-      <h3 style="color:#333;">Member 4</h3>
-      <p style="color:#667eea;">Backend Developer</p>
-      <p style="color:#888;font-size:0.85rem;">
-        Database & API</p>
-    </div>
-
-  </div>
-</section>
- <section style="padding:4rem 2rem;
-  background:white;">
-
-  <h2 style="text-align:center;color:#333;
-    font-size:2rem;margin-bottom:3rem;">
-    ❓ Frequently Asked Questions
-  </h2>
-
-  <div style="max-width:700px;margin:0 auto;">
-
-    <div onclick="
-      let a=this.querySelector('.ans');
-      a.style.display=
-      a.style.display=='none'?'block':'none'"
-      style="border:1px solid #eee;
-      border-radius:10px;padding:1.2rem;
-      margin-bottom:1rem;cursor:pointer;">
-      <b style="color:#667eea;">
-        Q: Is SkillSync free to use?
-      </b>
-      <p class="ans" style="display:none;
-        color:#555;margin-top:0.5rem;">
-        Yes! SkillSync is free for students.
-        We follow a Freemium model —
-        basic features are free forever.
-      </p>
-    </div>
-
-    <div onclick="
-      let a=this.querySelector('.ans');
-      a.style.display=
-      a.style.display=='none'?'block':'none'"
-      style="border:1px solid #eee;
-      border-radius:10px;padding:1.2rem;
-      margin-bottom:1rem;cursor:pointer;">
-      <b style="color:#667eea;">
-        Q: How does AI Skill Gap work?
-      </b>
-      <p class="ans" style="display:none;
-        color:#555;margin-top:0.5rem;">
-        Upload your resume — our NLP engine
-        analyzes it, compares with 10,000+
-        job descriptions and shows
-        missing skills.
-      </p>
-    </div>
-
-    <div onclick="
-      let a=this.querySelector('.ans');
-      a.style.display=
-      a.style.display=='none'?'block':'none'"
-      style="border:1px solid #eee;
-      border-radius:10px;padding:1.2rem;
-      margin-bottom:1rem;cursor:pointer;">
-      <b style="color:#667eea;">
-        Q: Which colleges can use SkillSync?
-      </b>
-      <p class="ans" style="display:none;
-        color:#555;margin-top:0.5rem;">
-        Any college! We have a B2B licensing
-        model for colleges and universities
-        across India.
-      </p>
-    </div>
-
-    <div onclick="
-      let a=this.querySelector('.ans');
-      a.style.display=
-      a.style.display=='none'?'block':'none'"
-      style="border:1px solid #eee;
-      border-radius:10px;padding:1.2rem;
-      margin-bottom:1rem;cursor:pointer;">
-      <b style="color:#667eea;">
-        Q: Does it work on mobile?
-      </b>
-      <p class="ans" style="display:none;
-        color:#555;margin-top:0.5rem;">
-        Yes! SkillSync is fully responsive
-        and we also have a Flutter mobile
-        app in development.
-      </p>
-    </div>
-
-    <div onclick="
-      let a=this.querySelector('.ans');
-      a.style.display=
-      a.style.display=='none'?'block':'none'"
-      style="border:1px solid #eee;
-      border-radius:10px;padding:1.2rem;
-      margin-bottom:1rem;cursor:pointer;">
-      <b style="color:#667eea;">
-        Q: How does Job Matching work?
-      </b>
-      <p class="ans" style="display:none;
-        color:#555;margin-top:0.5rem;">
-        Our ML engine uses cosine similarity
-        on skill vectors to match your
-        profile to real internship and
-        job listings.
-      </p>
-    </div>
-
-  </div>
-</section> 
 </body>
 </html>
