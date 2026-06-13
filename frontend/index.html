@@ -8432,3 +8432,33 @@ function deleteSkill(index) {
 renderSkills();
 </script> 
 </html>
+<button onclick="toggleDark()"
+  id="darkBtn"
+  style="
+    position:fixed;
+    bottom:80px;right:20px;
+    width:50px;height:50px;
+    border-radius:50%;
+    background:#333;
+    color:white;border:none;
+    font-size:1.3rem;
+    cursor:pointer;
+    box-shadow:0 4px 15px
+    rgba(0,0,0,0.3);
+    z-index:999;">
+  🌙
+</button>
+
+<script>
+function toggleDark() {
+  const body = document.body;
+  const btn = document.getElementById('darkBtn');
+  if(body.style.filter === 'invert(1)') {
+    body.style.filter = 'none';
+    btn.innerHTML = '🌙';
+  } else {
+    body.style.filter = 'invert(1)';
+    btn.innerHTML = '☀️';
+  }
+}
+</script>
